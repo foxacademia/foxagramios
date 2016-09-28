@@ -9,6 +9,5 @@
 import UIKit
 
 class Me: NSObject {
-    static var token: String = ""
-    static var headers: [String: String] = [:]
+    static var TOKEN: [String: String] = [:]
 }

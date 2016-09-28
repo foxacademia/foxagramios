@@ -73,11 +73,11 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate {
                 
              
                 Alamofire.request("\(Utilities.url)auth/login", method: .post, parameters: params).responseJSON { response in
-                    if let json_token :JSON = JSON(response.result.value){
+                    if let json_token :JSON = JSON(response.result.value) {
                         let headers = [
                             "Authorization": "\(json_token["token"].string!)"
                         ]
-                        Me.headers = headers
+                        Me.TOKEN = headers
                         self.performSegue(withIdentifier: "init", sender: self)
                     }
                 }

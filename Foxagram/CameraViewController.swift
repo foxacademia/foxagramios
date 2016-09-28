@@ -71,7 +71,7 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
                 multipartFormData.append("title".data(using: String.Encoding.utf8)!, withName: "title")
             },
             to: "\(Utilities.url)photo/upload",
-            headers: Me.headers,
+            headers: Me.TOKEN,
             encodingCompletion: { encodingResult in
                 
                 switch encodingResult {

@@ -10,6 +10,9 @@ import UIKit
 import Alamofire
 
 class DashboardViewController: UIViewController {
+    
+    @IBOutlet weak var home_table_view: UITableView!
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,12 +31,10 @@ class DashboardViewController: UIViewController {
         
         print("DID APPEAR")
         
-        Alamofire.request("http://0.0.0.0:3000/user/2/follow" ,method: .post, parameters: params,headers: Me.headers).responseJSON { response in
-            
-            if let json :JSON = JSON(response.result.value){
-                print("Following \(json)")
+        Alamofire.request(Utilities.url ,method: .get, parameters: params, headers: Me.TOKEN).responseJSON { response in
+            if let json :JSON = JSON(response.result.value) {
+                print("JSON: \(json)")
             }
-            
         }
 
     }
