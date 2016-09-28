@@ -195,6 +195,9 @@
                                     <constraint firstAttribute="height" constant="60" id="HOd-ae-J50"/>
                                     <constraint firstAttribute="width" constant="60" id="Jdz-Ql-ukw"/>
                                 </constraints>
+                                <connections>
+                                    <action selector="takePhoto:" destination="fhY-Vy-E6T" eventType="touchUpInside" id="Dra-CC-UsE"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

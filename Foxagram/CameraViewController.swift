@@ -127,8 +127,10 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
         super.didReceiveMemoryWarning()
     }
     
-    @IBAction func openCameraButton(_ sender: AnyObject) {
-        openCamera()
+    @IBAction func takePhoto(_ sender: AnyObject) {
+        if let videoConnection = stillImageOutput.connection(withMediaType: AVMediaTypeVideo){
+            
+        }
     }
 
 }
