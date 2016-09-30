@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -58,7 +59,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Item 1" id="vKn-vY-8vM"/>
-                    <navigationItem key="navigationItem" id="NJc-Qs-sR5"/>
+                    <navigationItem key="navigationItem" title="foxagram" id="NJc-Qs-sR5"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WPB-ha-yoQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -88,9 +89,13 @@
             <objects>
                 <navigationController id="L5l-ql-B4P" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" id="mdG-hY-GHw"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="ldX-nI-s6m">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="ldX-nI-s6m">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" red="0.69809642779763836" green="0.68596772979275755" blue="0.67043684026310402" alpha="1" colorSpace="calibratedRGB"/>
+                        </textAttributes>
                     </navigationBar>
                     <connections>
                         <segue destination="vOf-B8-nnt" kind="relationship" relationship="rootViewController" id="C9S-xF-Ah6"/>
@@ -188,6 +193,13 @@
                                 <frame key="frameInset" minY="70" width="375" height="476"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dUY-op-pyv">
+                                <frame key="frameInset" minX="301" minY="477" width="58" height="30"/>
+                                <state key="normal" title="Upload"/>
+                                <connections>
+                                    <action selector="uploadPhoto:" destination="fhY-Vy-E6T" eventType="touchUpInside" id="HrO-WA-DEg"/>
+                                </connections>
+                            </button>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DZa-vq-13Q">
                                 <frame key="frameInset" minX="157" minY="462" width="60" height="60"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -199,21 +211,32 @@
                                     <action selector="takePhoto:" destination="fhY-Vy-E6T" eventType="touchUpInside" id="Dra-CC-UsE"/>
                                 </connections>
                             </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ud7-7d-Dcj">
+                                <frame key="frameInset" minY="70" width="375" height="476"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="uKO-Z2-D3m" secondAttribute="trailing" id="GsZ-Oy-nry"/>
+                            <constraint firstItem="dUY-op-pyv" firstAttribute="trailing" secondItem="kZ4-by-i9p" secondAttribute="trailingMargin" id="KnN-am-877"/>
                             <constraint firstItem="cf3-l6-Ahp" firstAttribute="top" secondItem="DZa-vq-13Q" secondAttribute="bottom" constant="22" id="abz-UM-fDK"/>
                             <constraint firstItem="cf3-l6-Ahp" firstAttribute="top" secondItem="uKO-Z2-D3m" secondAttribute="bottom" id="bP0-UE-gvD"/>
+                            <constraint firstItem="Ud7-7d-Dcj" firstAttribute="top" secondItem="fzv-XO-Q9g" secondAttribute="bottom" id="cif-ef-aWU"/>
                             <constraint firstItem="DZa-vq-13Q" firstAttribute="centerX" secondItem="kZ4-by-i9p" secondAttribute="centerX" id="hev-Wd-a3d"/>
+                            <constraint firstItem="Ud7-7d-Dcj" firstAttribute="leading" secondItem="kZ4-by-i9p" secondAttribute="leading" id="hwR-OO-mY1"/>
                             <constraint firstItem="uKO-Z2-D3m" firstAttribute="leading" secondItem="kZ4-by-i9p" secondAttribute="leading" id="rGe-Np-FCH"/>
+                            <constraint firstItem="cf3-l6-Ahp" firstAttribute="top" secondItem="dUY-op-pyv" secondAttribute="bottom" constant="47" id="rr1-mw-cfH"/>
                             <constraint firstItem="uKO-Z2-D3m" firstAttribute="top" secondItem="fzv-XO-Q9g" secondAttribute="bottom" id="sQk-Bq-rmy"/>
+                            <constraint firstAttribute="trailing" secondItem="Ud7-7d-Dcj" secondAttribute="trailing" id="vCw-5J-Ukz"/>
+                            <constraint firstItem="cf3-l6-Ahp" firstAttribute="top" secondItem="Ud7-7d-Dcj" secondAttribute="bottom" id="yOW-jG-gXB"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="yFo-0A-V5f"/>
                     <connections>
                         <outlet property="camera_view" destination="uKO-Z2-D3m" id="798-hB-RWi"/>
+                        <outlet property="image_preview" destination="Ud7-7d-Dcj" id="Udr-WN-iSY"/>
                         <outlet property="take_photo_btn" destination="DZa-vq-13Q" id="RBG-ZT-YDc"/>
+                        <outlet property="upload_button" destination="dUY-op-pyv" id="OCz-Py-gUE"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2YT-yR-rhy" userLabel="First Responder" sceneMemberID="firstResponder"/>

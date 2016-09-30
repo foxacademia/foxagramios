@@ -14,6 +14,8 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
 
     @IBOutlet var camera_view: UIView!
     @IBOutlet var take_photo_btn: UIButton!
+    @IBOutlet var image_preview: UIImageView!
+    @IBOutlet var upload_button: UIButton!
     
     var session = AVCaptureSession()
     var captureDevice : AVCaptureDevice?
@@ -27,28 +29,25 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
     }
     override func viewWillAppear(_ animated: Bool) {
         session = AVCaptureSession()
-        session.sessionPreset = AVCaptureSessionPresetPhoto
+        session.sessionPreset = AVCaptureSessionPreset1920x1080
         
         let backCamera = AVCaptureDevice.defaultDevice(withMediaType: AVMediaTypeVideo)
         
         let input: AVCaptureDeviceInput = try! AVCaptureDeviceInput(device: backCamera)
         
-        if session.canAddInput(input){
+        if session.canAddInput(input) {
             session.addInput(input)
-        }
-        
-        stillImageOutput.outputSettings = [AVVideoCodecKey: AVVideoCodecJPEG]
-        
-        if session.canAddOutput(stillImageOutput){
-            session.canAddOutput(stillImageOutput)
+            stillImageOutput = AVCaptureStillImageOutput()
+            stillImageOutput.outputSettings = [AVVideoCodecKey: AVVideoCodecJPEG]
             
-            videoPreviewLayer = AVCaptureVideoPreviewLayer(session: session)
-            videoPreviewLayer.videoGravity = AVLayerVideoGravityResizeAspectFill
-            videoPreviewLayer.connection.videoOrientation = AVCaptureVideoOrientation.portrait
-            camera_view.layer.addSublayer(videoPreviewLayer)
-            //self.view.layer.addSublayer(videoPreviewLayer)
-            session.startRunning()
-
+            if session.canAddOutput(stillImageOutput){
+                session.addOutput(stillImageOutput)
+                videoPreviewLayer = AVCaptureVideoPreviewLayer(session: session)
+                videoPreviewLayer.videoGravity = AVLayerVideoGravityResizeAspectFill
+                videoPreviewLayer.connection.videoOrientation = .portrait
+                camera_view.layer.addSublayer(videoPreviewLayer)
+                session.startRunning()
+            }
         }
     }
     
@@ -107,30 +106,63 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
 
     }
     
-    
-    func beginSession() {
-       /* var err : NSError? = nil
-   
-        captureSession.addInput(AVCaptureDeviceInput(device: captureDevice, error: &err))
-        
-        if err != nil {
-            println("error: \(err?.localizedDescription)")
-        }
-        
-        let previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
-        self.camera_view.layer.addSublayer(previewLayer)
-        previewLayer?.frame = self.view.layer.frame
-        captureSession.startRunning()*/
-    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
     
     @IBAction func takePhoto(_ sender: AnyObject) {
+
         if let videoConnection = stillImageOutput.connection(withMediaType: AVMediaTypeVideo){
+            videoConnection.videoOrientation = AVCaptureVideoOrientation.portrait
             
+            stillImageOutput.captureStillImageAsynchronously(from: videoConnection, completionHandler: { (sampleBuffer, error) in
+                
+                if sampleBuffer != nil {
+                    let image_data = AVCaptureStillImageOutput.jpegStillImageNSDataRepresentation(sampleBuffer)
+                    
+                    let data_provider = CGDataProvider(data: image_data as! CFData)
+                    let cgImageRef = CGImage(jpegDataProviderSource: data_provider!, decode: nil, shouldInterpolate: true, intent: .defaultIntent)
+                    
+                    let image = UIImage(cgImage: cgImageRef!, scale: 1.0, orientation: UIImageOrientation.right)
+                    
+                    self.image_preview.image = image
+                    
+                }
+                
+            })
         }
     }
 
+    @IBAction func uploadPhoto(_ sender: AnyObject) {
+        let image_to_send = UIImageJPEGRepresentation(self.image_preview.image!, 0.2)
+        
+        Alamofire.upload(
+            multipartFormData: { multipartFormData in
+                multipartFormData.append(image_to_send!, withName: "photo", fileName: "sd.jepg"
+                    , mimeType: "image/jpeg")
+                multipartFormData.append("title".data(using: String.Encoding.utf8)!, withName: "title")
+            },
+            to: "\(Utilities.url)photo/upload",
+            headers: Me.headers,
+            encodingCompletion: { encodingResult in
+                
+                switch encodingResult {
+                    
+                case .success(let upload, _, _):
+                    upload.responseJSON { response in
+                        print(response)
+                        let json:JSON = JSON(response)
+                        print(json)
+                    }
+                    
+                case .failure(let encodingError):
+                    print("ERROR RESPONSE: \(encodingError)")
+                    
+                }
+                
+            }
+        )
+
+    }
 }

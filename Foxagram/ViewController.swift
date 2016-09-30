@@ -72,13 +72,19 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate {
                     //"main_image":"https://graph.facebook.com/\(json["id"].string!)/picture?type=large"]
                 
              
-                Alamofire.request("\(Utilities.url)auth/login", method: .post, parameters: params).responseJSON { response in
-                    if let json_token :JSON = JSON(response.result.value){
-                        let headers = [
-                            "Authorization": "\(json_token["token"].string!)"
-                        ]
-                        Me.headers = headers
-                        self.performSegue(withIdentifier: "init", sender: self)
+                Alamofire.request("\(Utilities.url)auth/login", method: .post, parameters: params).validate().responseJSON { response in
+                    switch response.result {
+                    case .success:
+                        if let json_token :JSON = JSON(response.result.value){
+                            print(json_token)
+                            let headers = [
+                                "Authorization": "\(json_token["token"].string!)"
+                            ]
+                            Me.headers = headers
+                            self.performSegue(withIdentifier: "init", sender: self)
+                        }
+                    case .failure:
+                        print("Error")
                     }
                 }
             }
@@ -89,7 +95,7 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate {
     func loginButtonDidLogOut(_ loginButton: FBSDKLoginButton!) {
         print("User logged out")
     }
-
+    
 
 }
 
