@@ -180,30 +180,41 @@
                         <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uKO-Z2-D3m">
-                                <frame key="frameInset" minX="45" minY="183" width="240" height="128"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uKO-Z2-D3m">
+                                <frame key="frameInset" minY="70" width="375" height="476"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="il4-Uc-u4J">
-                                <frame key="frameInset" minX="164" minY="70" width="46" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DZa-vq-13Q">
+                                <frame key="frameInset" minX="157" minY="462" width="60" height="60"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="HOd-ae-J50"/>
+                                    <constraint firstAttribute="width" constant="60" id="Jdz-Ql-ukw"/>
+                                </constraints>
                                 <connections>
-                                    <action selector="openCameraButton:" destination="fhY-Vy-E6T" eventType="touchUpInside" id="6Gs-Pm-h8w"/>
+                                    <action selector="takePhoto:" destination="fhY-Vy-E6T" eventType="touchUpInside" id="Dra-CC-UsE"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="uKO-Z2-D3m" secondAttribute="trailing" id="GsZ-Oy-nry"/>
+                            <constraint firstItem="cf3-l6-Ahp" firstAttribute="top" secondItem="DZa-vq-13Q" secondAttribute="bottom" constant="22" id="abz-UM-fDK"/>
+                            <constraint firstItem="cf3-l6-Ahp" firstAttribute="top" secondItem="uKO-Z2-D3m" secondAttribute="bottom" id="bP0-UE-gvD"/>
+                            <constraint firstItem="DZa-vq-13Q" firstAttribute="centerX" secondItem="kZ4-by-i9p" secondAttribute="centerX" id="hev-Wd-a3d"/>
+                            <constraint firstItem="uKO-Z2-D3m" firstAttribute="leading" secondItem="kZ4-by-i9p" secondAttribute="leading" id="rGe-Np-FCH"/>
+                            <constraint firstItem="uKO-Z2-D3m" firstAttribute="top" secondItem="fzv-XO-Q9g" secondAttribute="bottom" id="sQk-Bq-rmy"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="yFo-0A-V5f"/>
                     <connections>
                         <outlet property="camera_view" destination="uKO-Z2-D3m" id="798-hB-RWi"/>
+                        <outlet property="take_photo_btn" destination="DZa-vq-13Q" id="RBG-ZT-YDc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2YT-yR-rhy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="201" y="2329"/>
+            <point key="canvasLocation" x="200.80000000000001" y="2328.4857571214393"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="m8g-31-tWK">

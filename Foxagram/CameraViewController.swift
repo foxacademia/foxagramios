@@ -13,33 +13,49 @@ import Alamofire
 class CameraViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     @IBOutlet var camera_view: UIView!
+    @IBOutlet var take_photo_btn: UIButton!
     
-    let captureSession = AVCaptureSession()
-    // If we find a device we'll store it here for later use
+    var session = AVCaptureSession()
     var captureDevice : AVCaptureDevice?
+    var stillImageOutput: AVCaptureStillImageOutput = AVCaptureStillImageOutput()
+    var videoPreviewLayer = AVCaptureVideoPreviewLayer()
+    
+    override func viewDidAppear(_ animated: Bool) {
+        
+        videoPreviewLayer.frame = camera_view.bounds
+    
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        session = AVCaptureSession()
+        session.sessionPreset = AVCaptureSessionPresetPhoto
+        
+        let backCamera = AVCaptureDevice.defaultDevice(withMediaType: AVMediaTypeVideo)
+        
+        let input: AVCaptureDeviceInput = try! AVCaptureDeviceInput(device: backCamera)
+        
+        if session.canAddInput(input){
+            session.addInput(input)
+        }
+        
+        stillImageOutput.outputSettings = [AVVideoCodecKey: AVVideoCodecJPEG]
+        
+        if session.canAddOutput(stillImageOutput){
+            session.canAddOutput(stillImageOutput)
+            
+            videoPreviewLayer = AVCaptureVideoPreviewLayer(session: session)
+            videoPreviewLayer.videoGravity = AVLayerVideoGravityResizeAspectFill
+            videoPreviewLayer.connection.videoOrientation = AVCaptureVideoOrientation.portrait
+            camera_view.layer.addSublayer(videoPreviewLayer)
+            //self.view.layer.addSublayer(videoPreviewLayer)
+            session.startRunning()
+
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        /*
-        // Do any additional setup after loading the view, typically from a nib.
-        captureSession.sessionPreset = AVCaptureSessionPresetLow
         
-        let devices = AVCaptureDevice.devices()
-        
-        // Loop through all the capture devices on this phone
-        for device in devices! {
-            // Make sure this particular device supports video
-            if ((device as AnyObject).hasMediaType(AVMediaTypeVideo)) {
-                // Finally check the position and confirm we've got the back camera
-                if((device as AnyObject).position == .back) {
-                    captureDevice = device as? AVCaptureDevice
-                }
-            }
-        }
-        
-        if captureDevice != nil {
-            beginSession()
-        }*/
+        take_photo_btn.layer.cornerRadius = 30.0
         
     }
 
@@ -53,16 +69,11 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
         }
     }
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        print("entrooo2")
 
         self.dismiss(animated: true, completion: nil);
         
         let photo = info[UIImagePickerControllerOriginalImage] as? UIImage
         let imageData = UIImageJPEGRepresentation(photo!, 0.2)
-
-        /*Alamofire.upload(imageData!, to: "\(Utilities.url)photo/upload").responseJSON { response in
-            print(response)
-        }*/
         
         Alamofire.upload(
             multipartFormData: { multipartFormData in
@@ -116,8 +127,10 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
         super.didReceiveMemoryWarning()
     }
     
-    @IBAction func openCameraButton(_ sender: AnyObject) {
-        openCamera()
+    @IBAction func takePhoto(_ sender: AnyObject) {
+        if let videoConnection = stillImageOutput.connection(withMediaType: AVMediaTypeVideo){
+            
+        }
     }
 
 }

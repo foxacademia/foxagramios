@@ -68,17 +68,17 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate {
                     "facebook_key" : facebook_key,
                     "names" : names,
                     "surnames": surnames,
-                    "email": email]
-                    //"main_image":"https://graph.facebook.com/\(json["id"].string!)/picture?type=large"]
+                    "email": email,
+                    "user_image": "https://graph.facebook.com/\(json["id"].string!)/picture?type=large"]
                 
              
                 Alamofire.request("\(Utilities.url)auth/login", method: .post, parameters: params).responseJSON { response in
                     if let json_token :JSON = JSON(response.result.value) {
-                        let headers = [
-                            "Authorization": "\(json_token["token"].string!)"
-                        ]
-                        Me.TOKEN = headers
-                        self.performSegue(withIdentifier: "init", sender: self)
+//                        if json_token["token"].string != nil {
+                            let headers = ["Authorization": "\(json_token["token"].string!)"]
+                            Me.TOKEN = headers
+                            self.performSegue(withIdentifier: "init", sender: self)
+//                        } else {self.getFBUserData()}
                     }
                 }
             }

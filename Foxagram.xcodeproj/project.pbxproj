@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6D1F67171D9C831B0040668D /* CustomHomeSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D1F67161D9C831B0040668D /* CustomHomeSectionView.swift */; };
+		6D1F67211D9C865B0040668D /* CustomHomeSectionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D1F67201D9C865B0040668D /* CustomHomeSectionView.xib */; };
+		6D44B8761D9C42280018AF9F /* HomeObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D44B8751D9C42280018AF9F /* HomeObject.swift */; };
 		6DCE826E1D9AD6C50064F68B /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DCE82611D9AD4A00064F68B /* Alamofire.framework */; };
 		6DCE826F1D9AD6C50064F68B /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6DCE82611D9AD4A00064F68B /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A03774CD1D99D70F007E5C36 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03774CC1D99D70F007E5C36 /* Utilities.swift */; };
@@ -99,6 +102,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		6D1F67161D9C831B0040668D /* CustomHomeSectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomHomeSectionView.swift; sourceTree = "<group>"; };
+		6D1F67201D9C865B0040668D /* CustomHomeSectionView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomHomeSectionView.xib; sourceTree = "<group>"; };
+		6D44B8751D9C42280018AF9F /* HomeObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeObject.swift; sourceTree = "<group>"; };
 		6DCE82551D9AD49F0064F68B /* Alamofire.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Alamofire.xcodeproj; path = Alamofire/Alamofire.xcodeproj; sourceTree = "<group>"; };
 		A03774CC1D99D70F007E5C36 /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		A043BF6B1D92E3D800D786CF /* Foxagram.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Foxagram.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -181,6 +187,9 @@
 				A043BF751D92E3D800D786CF /* Assets.xcassets */,
 				A043BF771D92E3D800D786CF /* LaunchScreen.storyboard */,
 				A043BF7A1D92E3D800D786CF /* Info.plist */,
+				6D44B8751D9C42280018AF9F /* HomeObject.swift */,
+				6D1F67161D9C831B0040668D /* CustomHomeSectionView.swift */,
+				6D1F67201D9C865B0040668D /* CustomHomeSectionView.xib */,
 			);
 			path = Foxagram;
 			sourceTree = "<group>";
@@ -323,6 +332,7 @@
 			files = (
 				A043BF791D92E3D800D786CF /* LaunchScreen.storyboard in Resources */,
 				A043BF761D92E3D800D786CF /* Assets.xcassets in Resources */,
+				6D1F67211D9C865B0040668D /* CustomHomeSectionView.xib in Resources */,
 				A043BF741D92E3D800D786CF /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -337,6 +347,8 @@
 				A0BCAF041D95A1BE00B4CE38 /* SwiftyJSON.swift in Sources */,
 				A0BCAF061D99785200B4CE38 /* Me.swift in Sources */,
 				A03774CD1D99D70F007E5C36 /* Utilities.swift in Sources */,
+				6D1F67171D9C831B0040668D /* CustomHomeSectionView.swift in Sources */,
+				6D44B8761D9C42280018AF9F /* HomeObject.swift in Sources */,
 				A0BCAF081D99832E00B4CE38 /* DashboardViewController.swift in Sources */,
 				A043BF711D92E3D800D786CF /* ViewController.swift in Sources */,
 				A043BF6F1D92E3D800D786CF /* AppDelegate.swift in Sources */,
