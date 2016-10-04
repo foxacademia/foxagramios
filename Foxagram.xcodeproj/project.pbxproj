@@ -12,6 +12,7 @@
 		6D44B8761D9C42280018AF9F /* HomeObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D44B8751D9C42280018AF9F /* HomeObject.swift */; };
 		6DCE826E1D9AD6C50064F68B /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DCE82611D9AD4A00064F68B /* Alamofire.framework */; };
 		6DCE826F1D9AD6C50064F68B /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6DCE82611D9AD4A00064F68B /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		6DDCAA761D9F12360086A75F /* CustomHomeCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DDCAA751D9F12360086A75F /* CustomHomeCellView.swift */; };
 		A03774CD1D99D70F007E5C36 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03774CC1D99D70F007E5C36 /* Utilities.swift */; };
 		A043BF6F1D92E3D800D786CF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A043BF6E1D92E3D800D786CF /* AppDelegate.swift */; };
 		A043BF711D92E3D800D786CF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A043BF701D92E3D800D786CF /* ViewController.swift */; };
@@ -106,6 +107,7 @@
 		6D1F67201D9C865B0040668D /* CustomHomeSectionView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomHomeSectionView.xib; sourceTree = "<group>"; };
 		6D44B8751D9C42280018AF9F /* HomeObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeObject.swift; sourceTree = "<group>"; };
 		6DCE82551D9AD49F0064F68B /* Alamofire.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Alamofire.xcodeproj; path = Alamofire/Alamofire.xcodeproj; sourceTree = "<group>"; };
+		6DDCAA751D9F12360086A75F /* CustomHomeCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomHomeCellView.swift; sourceTree = "<group>"; };
 		A03774CC1D99D70F007E5C36 /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		A043BF6B1D92E3D800D786CF /* Foxagram.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Foxagram.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A043BF6E1D92E3D800D786CF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -190,6 +192,7 @@
 				6D44B8751D9C42280018AF9F /* HomeObject.swift */,
 				6D1F67161D9C831B0040668D /* CustomHomeSectionView.swift */,
 				6D1F67201D9C865B0040668D /* CustomHomeSectionView.xib */,
+				6DDCAA751D9F12360086A75F /* CustomHomeCellView.swift */,
 			);
 			path = Foxagram;
 			sourceTree = "<group>";
@@ -344,6 +347,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6DDCAA761D9F12360086A75F /* CustomHomeCellView.swift in Sources */,
 				A0BCAF041D95A1BE00B4CE38 /* SwiftyJSON.swift in Sources */,
 				A0BCAF061D99785200B4CE38 /* Me.swift in Sources */,
 				A03774CD1D99D70F007E5C36 /* Utilities.swift in Sources */,

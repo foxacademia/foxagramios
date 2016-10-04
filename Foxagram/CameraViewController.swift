@@ -27,6 +27,7 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
         videoPreviewLayer.frame = camera_view.bounds
     
     }
+    
     override func viewWillAppear(_ animated: Bool) {
         session = AVCaptureSession()
         session.sessionPreset = AVCaptureSessionPreset1920x1080

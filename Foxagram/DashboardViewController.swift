@@ -26,6 +26,7 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
     @IBOutlet weak var home_table_view: UITableView!
     var home_object_array = [HomeObject]()
     var home_section_image: [Int: UIImage] = [:]
+    var home_publication_image: [String: UIImage] = [:]
     var cell_index: Int = 0
     
     override func viewDidLoad() {
@@ -33,6 +34,10 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
         
         home_table_view.delegate = self
         home_table_view.dataSource = self
+        
+        
+        home_table_view.rowHeight = UITableViewAutomaticDimension
+        home_table_view.estimatedRowHeight = 44
         
         getHome()
 
@@ -45,7 +50,7 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        
+        self.home_table_view.reloadData()
     }
     
     internal func numberOfSections(in tableView: UITableView) -> Int {
@@ -73,15 +78,28 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
 
         return custom_home_section_view
     }
-    
+//    
+//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        let height: CGFloat = 200
+//        if self.home_publication_image["cell\(indexPath.section)"] != nil {
+//            let image: UIImage = self.home_publication_image["cell\(indexPath.section)"]!
+//            height = image.size.height
+//        }
+//        
+//        return height
+//    }
+//    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell: UITableViewCell = UITableViewCell()
-        cell.textLabel?.text = "hue \(home_object_array[self.cell_index].photo_title)"
-        cell_index += 1
+        let cell: CustomHomeCellView = home_table_view.dequeueReusableCell(withIdentifier: "CustomHomeCellView",
+                                                                           for: indexPath) as! CustomHomeCellView
+        cell.loadCell(item: home_object_array[indexPath.section])
+    //    cell.publication_description.text = "section \(indexPath.section)"
+        setOwnerPublication(index: "cell\(indexPath.section)", cell: cell, url: cell.publication_url)
+     
         return cell
     }
     
-    private func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("touched")
     }
     
@@ -95,7 +113,6 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
                     self.home_object_array.append(HomeObject(item: subJson))
                 }
                 self.home_table_view.reloadData()
-                self.cell_index = 0
             }
         }
     }
@@ -109,5 +126,29 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
         }
     }
     
+    func setOwnerPublication(index: String, cell: CustomHomeCellView, url: String) {
+        if self.home_publication_image[index] != nil {
+            cell.publication_image.image = self.home_publication_image[index]!
+            
+        } else {
+            cell.publication_image.imageFromUrl(urlString: url)
+            self.home_publication_image[index] = cell.publication_image.image
+        }
+    }
+    
+//    function for scale images
+//    func imageWithImage (sourceImage:UIImage, scaledToWidth: CGFloat) -> UIImage {
+//        let oldWidth = sourceImage.size.width
+//        let scaleFactor = scaledToWidth / oldWidth
+//        
+//        let newHeight = sourceImage.size.height * scaleFactor
+//        let newWidth = oldWidth * scaleFactor
+//        
+//        UIGraphicsBeginImageContext(CGSize(width:newWidth, height:newHeight))
+//        sourceImage.draw(in: CGRect(x:0, y:0, width:newWidth, height:newHeight))
+//        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+//        UIGraphicsEndImageContext()
+//        return newImage!
+//    }
 
 }

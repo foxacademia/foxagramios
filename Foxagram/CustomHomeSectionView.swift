@@ -16,7 +16,7 @@ class CustomHomeSectionView: UIView {
     @IBOutlet weak var owner_image: UIImageView!
     
     func loadHeader(home_item: HomeObject) {
-        owner_label.text = home_item.owner
+        owner_label.text = home_item.owner.uppercased()
     }
     
 }
