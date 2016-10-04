@@ -55,6 +55,7 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
         super.viewDidLoad()
         
         take_photo_btn.layer.cornerRadius = 30.0
+        image_preview.isHidden = true
         
     }
 
@@ -127,6 +128,7 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
                     let image = UIImage(cgImage: cgImageRef!, scale: 1.0, orientation: UIImageOrientation.right)
                     
                     self.image_preview.image = image
+                    self.image_preview.isHidden = false
                     
                 }
                 
@@ -154,6 +156,7 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
                         print(response)
                         let json:JSON = JSON(response)
                         print(json)
+                        self.image_preview.isHidden = true
                     }
                     
                 case .failure(let encodingError):

@@ -9,6 +9,6 @@
 import UIKit
 
 class Utilities: NSObject {
-    static var url = "http://192.168.1.242:3000/"
-//    static var url = "http://192.168.1.237:3000/"
+    static var url = "http://192.168.1.108:3000/"
+    //static var url = "http://192.168.1.237:3000/"
 }

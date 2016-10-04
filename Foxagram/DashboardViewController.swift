@@ -35,8 +35,7 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
         home_table_view.dataSource = self
         
         getHome()
-
-        // Do any additional setup after loading the view.
+        
     }
 
     override func didReceiveMemoryWarning() {
