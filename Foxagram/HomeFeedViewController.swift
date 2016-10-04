@@ -21,7 +21,7 @@ extension UIImageView {
     }
 }
 
-class DashboardViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class HomeFeedViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     @IBOutlet weak var home_table_view: UITableView!
     var home_object_array = [HomeObject]()
@@ -40,8 +40,7 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
         home_table_view.estimatedRowHeight = 44
         
         getHome()
-
-        // Do any additional setup after loading the view.
+        
     }
 
     override func didReceiveMemoryWarning() {
