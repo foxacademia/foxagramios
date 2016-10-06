@@ -76,9 +76,7 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate {
                     case .success:
                         if let json_token :JSON = JSON(response.result.value){
                             print(json_token)
-                            let headers = [
-                                "Authorization": "\(json_token["token"].string!)"
-                            ]
+                            let headers = [ "Authorization": "\(json_token["token"].string!)" ]
                             Me.TOKEN = headers
                             self.performSegue(withIdentifier: "init", sender: self)
                         }
@@ -89,7 +87,6 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate {
             }
         })
     }
-
 
     func loginButtonDidLogOut(_ loginButton: FBSDKLoginButton!) {
         print("User logged out")

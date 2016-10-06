@@ -11,12 +11,14 @@ import UIKit
 class CustomHomeCellView: UITableViewCell {
     
     
+    @IBOutlet weak var publication_owner: UILabel!
     @IBOutlet weak var publication_description: UILabel!
     @IBOutlet weak var publication_image: UIImageView!
     var publication_url: String!
     
     func loadCell(item: HomeObject) {
         publication_url = Utilities.photo_url + "\(item.owner_id)/\(item.photo_name)"
-        publication_description.text = "\(item.owner): \(item.photo_title)"
+        publication_owner.text = item.owner
+        publication_description.text = item.photo_title
     }
 }

@@ -9,7 +9,11 @@
 /* Begin PBXBuildFile section */
 		6D1F67171D9C831B0040668D /* CustomHomeSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D1F67161D9C831B0040668D /* CustomHomeSectionView.swift */; };
 		6D1F67211D9C865B0040668D /* CustomHomeSectionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D1F67201D9C865B0040668D /* CustomHomeSectionView.xib */; };
+		6D3757D51DA580EC006FD63F /* PublicationCommentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3757D41DA580EC006FD63F /* PublicationCommentsViewController.swift */; };
+		6D4074831DA5C78C00121325 /* CommentCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D4074821DA5C78C00121325 /* CommentCellView.swift */; };
+		6D40748C1DA5CB4500121325 /* CommentObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D40748B1DA5CB4500121325 /* CommentObject.swift */; };
 		6D44B8761D9C42280018AF9F /* HomeObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D44B8751D9C42280018AF9F /* HomeObject.swift */; };
+		6D923E681DA4AABB0082C25C /* PublicationDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D923E671DA4AABB0082C25C /* PublicationDetailViewController.swift */; };
 		6DDCAA761D9F12360086A75F /* CustomHomeCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DDCAA751D9F12360086A75F /* CustomHomeCellView.swift */; };
 		A03774CD1D99D70F007E5C36 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03774CC1D99D70F007E5C36 /* Utilities.swift */; };
 		A043BF6F1D92E3D800D786CF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A043BF6E1D92E3D800D786CF /* AppDelegate.swift */; };
@@ -107,7 +111,11 @@
 /* Begin PBXFileReference section */
 		6D1F67161D9C831B0040668D /* CustomHomeSectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomHomeSectionView.swift; sourceTree = "<group>"; };
 		6D1F67201D9C865B0040668D /* CustomHomeSectionView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomHomeSectionView.xib; sourceTree = "<group>"; };
+		6D3757D41DA580EC006FD63F /* PublicationCommentsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PublicationCommentsViewController.swift; sourceTree = "<group>"; };
+		6D4074821DA5C78C00121325 /* CommentCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentCellView.swift; sourceTree = "<group>"; };
+		6D40748B1DA5CB4500121325 /* CommentObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentObject.swift; sourceTree = "<group>"; };
 		6D44B8751D9C42280018AF9F /* HomeObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeObject.swift; sourceTree = "<group>"; };
+		6D923E671DA4AABB0082C25C /* PublicationDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PublicationDetailViewController.swift; sourceTree = "<group>"; };
 		6DDCAA751D9F12360086A75F /* CustomHomeCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomHomeCellView.swift; sourceTree = "<group>"; };
 		A03774CC1D99D70F007E5C36 /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		A043BF6B1D92E3D800D786CF /* Foxagram.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Foxagram.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -147,6 +155,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6D923E5F1DA4A7B10082C25C /* PublicationDetail */ = {
+			isa = PBXGroup;
+			children = (
+				6D923E671DA4AABB0082C25C /* PublicationDetailViewController.swift */,
+				6D3757D41DA580EC006FD63F /* PublicationCommentsViewController.swift */,
+				6D4074821DA5C78C00121325 /* CommentCellView.swift */,
+				6D40748B1DA5CB4500121325 /* CommentObject.swift */,
+			);
+			name = PublicationDetail;
+			sourceTree = "<group>";
+		};
 		6DEBFD911DA42DB800901E1A /* Home */ = {
 			isa = PBXGroup;
 			children = (
@@ -205,8 +224,8 @@
 		A043BF621D92E3D800D786CF = {
 			isa = PBXGroup;
 			children = (
-				A043BF9C1D92EEF200D786CF /* Frameworks */,
 				A043BF6D1D92E3D800D786CF /* Foxagram */,
+				A043BF9C1D92EEF200D786CF /* Frameworks */,
 				A043BF6C1D92E3D800D786CF /* Products */,
 			);
 			sourceTree = "<group>";
@@ -222,6 +241,7 @@
 		A043BF6D1D92E3D800D786CF /* Foxagram */ = {
 			isa = PBXGroup;
 			children = (
+				6D923E5F1DA4A7B10082C25C /* PublicationDetail */,
 				6DEBFD9A1DA42DFE00901E1A /* AppFlow */,
 				6DEBFD9C1DA42E2A00901E1A /* Camera */,
 				6DEBFD911DA42DB800901E1A /* Home */,
@@ -296,7 +316,7 @@
 				TargetAttributes = {
 					A043BF6A1D92E3D800D786CF = {
 						CreatedOnToolsVersion = 8.0;
-						DevelopmentTeam = QX6AA77Z42;
+						DevelopmentTeam = WKZMSRYE62;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.Keychain = {
@@ -409,7 +429,11 @@
 				6D1F67171D9C831B0040668D /* CustomHomeSectionView.swift in Sources */,
 				6D44B8761D9C42280018AF9F /* HomeObject.swift in Sources */,
 				A0BCAF081D99832E00B4CE38 /* HomeFeedViewController.swift in Sources */,
+				6D40748C1DA5CB4500121325 /* CommentObject.swift in Sources */,
+				6D923E681DA4AABB0082C25C /* PublicationDetailViewController.swift in Sources */,
+				6D3757D51DA580EC006FD63F /* PublicationCommentsViewController.swift in Sources */,
 				A043BF711D92E3D800D786CF /* ViewController.swift in Sources */,
+				6D4074831DA5C78C00121325 /* CommentCellView.swift in Sources */,
 				A043BF6F1D92E3D800D786CF /* AppDelegate.swift in Sources */,
 				A0BCAF0A1D9991EE00B4CE38 /* CameraViewController.swift in Sources */,
 				A052DE9E1DA2E08B00F207A8 /* ProfileHeader.swift in Sources */,
@@ -543,7 +567,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Foxagram/Foxagram.entitlements;
-				DEVELOPMENT_TEAM = QX6AA77Z42;
+				DEVELOPMENT_TEAM = WKZMSRYE62;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -551,7 +575,7 @@
 				INFOPLIST_FILE = Foxagram/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = fox.Foxagram;
+				PRODUCT_BUNDLE_IDENTIFIER = fox.Foxagramios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -563,7 +587,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Foxagram/Foxagram.entitlements;
-				DEVELOPMENT_TEAM = QX6AA77Z42;
+				DEVELOPMENT_TEAM = WKZMSRYE62;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -571,7 +595,7 @@
 				INFOPLIST_FILE = Foxagram/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = fox.Foxagram;
+				PRODUCT_BUNDLE_IDENTIFIER = fox.Foxagramios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
