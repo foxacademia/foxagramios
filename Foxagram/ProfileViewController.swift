@@ -16,24 +16,32 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource, UICol
     let identifier = "UserPhotosCell"
     let header_identifier = "UserProfileHeader"
     
-    var total = "10"
+    var followers: String = ""
+    var following: String = ""
     
-
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         Alamofire.request("\(Utilities.url)user/get/profile", method: .get, headers: Me.TOKEN).responseJSON { response in
             
-            print(response.result.value)
-            self.total = "120"
+            let json:JSON = JSON(response.result.value)
+            
+            for (_, subJson): (String, JSON) in json["profile"] {
+                self.followers = subJson["followers"].string!
+                self.following = subJson["following"].string!
+            }
+            
+            for (_, subJson): (String, JSON) in json["photos"] {
+                self.followers = subJson["followers"].string!
+                self.following = subJson["following"].string!
+            }
+            
             
             
             self.collection_view.reloadData()
           
         }
-        
-
     }
     
 
@@ -57,8 +65,9 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource, UICol
         
         let header_view: ProfileHeader = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: header_identifier, for: indexPath) as! ProfileHeader
         
-        header_view.publications_label.text = total
-        
+        header_view.followers_label.text = followers
+        header_view.following_label.text = following
+
         header_view.user_image.backgroundColor = .black
         //header_view.sectionLabel.text = dataSource.gettGroupLabelAtIndex(indexPath.section)
         
