@@ -12,6 +12,7 @@ import Alamofire
 class ProfileViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
 
     @IBOutlet var collection_view: UICollectionView!
+    var publications_array: [PublicationObject] = [PublicationObject]()
     
     let identifier = "UserPhotosCell"
     let header_identifier = "UserProfileHeader"
@@ -19,6 +20,7 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource, UICol
     var followers: String = ""
     var following: String = ""
     
+    var publication_images: [String: UIImage] = [:]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,11 +35,14 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource, UICol
             }
             
             for (_, subJson): (String, JSON) in json["photos"] {
-                self.followers = subJson["followers"].string!
-                self.following = subJson["following"].string!
+                let photo_id = subJson["id"].int
+                let photo_name = subJson["file_name"].string!
+                let owner_id = subJson["user_id"].int
+
+                let publication_object = PublicationObject(photo_id: photo_id!, photo_name: photo_name, owner_image: "", owner: "", owner_id: owner_id!)
+                
+                self.publications_array.append(publication_object)
             }
-            
-            
             
             self.collection_view.reloadData()
           
@@ -51,14 +56,29 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource, UICol
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 120
+        return publications_array.count
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath)
-        
-        cell.backgroundColor = .red
-        
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath) as! ProfileViewCell
+
+        if !publications_array.isEmpty{
+            let publication_object = publications_array[indexPath.row] as PublicationObject
+            //setOwnerPublication(index: indexPath.row, image_view: cell.publication_image, url: publication_object.photo_url)
+            
+            if (self.publication_images[identifier] != nil){
+                let image_saved : UIImage = self.publication_images[identifier]!
+                cell.publication_image.image = image_saved
+            } else {
+                cell.publication_image.imageFromUrl(urlString: publication_object.photo_url)
+                self.publication_images[identifier] = cell.publication_image.image
+
+            }
+
+
+
+            cell.backgroundColor = .red
+        }
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
@@ -67,6 +87,7 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource, UICol
         
         header_view.followers_label.text = followers
         header_view.following_label.text = following
+        header_view.publications_label.text = "\(publications_array.count)"
 
         header_view.user_image.backgroundColor = .black
         //header_view.sectionLabel.text = dataSource.gettGroupLabelAtIndex(indexPath.section)
@@ -74,6 +95,6 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource, UICol
         return header_view
         
     }
-    
+  
 
 }

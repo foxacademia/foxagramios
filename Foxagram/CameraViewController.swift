@@ -16,6 +16,8 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
     @IBOutlet var take_photo_btn: UIButton!
     @IBOutlet var image_preview: UIImageView!
     @IBOutlet var upload_button: UIButton!
+    @IBOutlet var cancel_button: UIButton!
+    @IBOutlet var photo_title: UITextField!
     
     var session = AVCaptureSession()
     var captureDevice : AVCaptureDevice?
@@ -23,9 +25,7 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
     var videoPreviewLayer = AVCaptureVideoPreviewLayer()
     
     override func viewDidAppear(_ animated: Bool) {
-        
         videoPreviewLayer.frame = camera_view.bounds
-    
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -57,10 +57,12 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
         
         take_photo_btn.layer.cornerRadius = 30.0
         image_preview.isHidden = true
+        upload_button.isHidden = true
+        cancel_button.isHidden = true
         
     }
 
-    func openCamera(){
+    /*func openCamera(){
         if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera) {
             let imagePicker = UIImagePickerController()
             imagePicker.delegate = self
@@ -68,7 +70,7 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
             imagePicker.allowsEditing = false
             self.present(imagePicker, animated: true, completion: nil)
         }
-    }
+    }*/
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
 
         self.dismiss(animated: true, completion: nil);
@@ -130,12 +132,16 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
                     
                     self.image_preview.image = image
                     self.image_preview.isHidden = false
+                    self.upload_button.isHidden = false
+                    self.cancel_button.isHidden = false
+                    self.photo_title.isHidden = false
                     
                 }
                 
             })
         }
     }
+
 
     @IBAction func uploadPhoto(_ sender: AnyObject) {
         let image_to_send = UIImageJPEGRepresentation(self.image_preview.image!, 0.2)
@@ -168,5 +174,8 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
             }
         )
 
+    }
+    @IBAction func dismiss(_ sender: AnyObject) {
+        self.dismiss(animated: true, completion: nil)
     }
 }
