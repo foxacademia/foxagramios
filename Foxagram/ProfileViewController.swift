@@ -30,16 +30,16 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource, UICol
             let json:JSON = JSON(response.result.value)
             
             for (_, subJson): (String, JSON) in json["profile"] {
-                self.followers = subJson["followers"].string!
-                self.following = subJson["following"].string!
+                self.followers = subJson["followers"].string ?? "0"
+                self.following = subJson["following"].string ?? "0"
             }
             
             for (_, subJson): (String, JSON) in json["photos"] {
-                let photo_id = subJson["id"].int
+                let photo_id = subJson["id"].int!
                 let photo_name = subJson["file_name"].string!
-                let owner_id = subJson["user_id"].int
+                let owner_id = subJson["user_id"].int!
 
-                let publication_object = PublicationObject(photo_id: photo_id!, photo_name: photo_name, owner_image: "", owner: "", owner_id: owner_id!)
+                let publication_object = PublicationObject(photo_id: photo_id, photo_name: photo_name, owner_image: "", owner: "", owner_id: owner_id)
                 
                 self.publications_array.append(publication_object)
             }
@@ -71,12 +71,10 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource, UICol
                 let image_saved : UIImage = self.publication_images[identifier]!
                 cell.publication_image.image = image_saved
             } else {
-                cell.publication_image.imageFromUrl(urlString: publication_object.photo_url)
-                self.publication_images[identifier] = cell.publication_image.image
-
+                cell.publication_image.imageFromUrl(url_string: publication_object.photo_url, completion: { (data) in
+                    self.publication_images[self.identifier] = data!
+                })
             }
-
-
 
             cell.backgroundColor = .red
         }
