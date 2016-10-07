@@ -16,9 +16,9 @@ class CommentObject: NSObject {
     let comment_body: String
     
     init(item: JSON) {
-        self.owner_id = item["user_id"].int!
-        self.owner = item["names"].string ?? ""
-        self.owner_image = item["user_image"].string ?? ""
+        self.owner_id = item["user_id"].int ?? 0
+        self.owner = item["User"]["names"].string ?? ""
+        self.owner_image = item["User"]["user_image"].string ?? ""
         self.comment_id = item["comment_id"].int ?? 0
         self.comment_body = item["comment_body"].string ?? ""
     }

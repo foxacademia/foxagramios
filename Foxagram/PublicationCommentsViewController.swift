@@ -13,7 +13,8 @@ class PublicationCommentsViewController: UIViewController, UITableViewDataSource
     
     @IBOutlet weak var comment_table_view: UITableView!
     var comment_object_array = [CommentObject]()
-    let photo_id: Int = 0
+    var comment_owner_image: [Int: UIImage] = [:]
+    var photo_id: Int!
     
     
     override func viewDidLoad() {
@@ -22,13 +23,15 @@ class PublicationCommentsViewController: UIViewController, UITableViewDataSource
         comment_table_view.delegate = self
         comment_table_view.dataSource = self
         
-        
         comment_table_view.rowHeight = UITableViewAutomaticDimension
         comment_table_view.estimatedRowHeight = 60
         
-        
         getComment()
         
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        self.comment_table_view.reloadData()
     }
     
     internal func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -37,23 +40,25 @@ class PublicationCommentsViewController: UIViewController, UITableViewDataSource
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell: CustomHomeCellView = comment_table_view.dequeueReusableCell(withIdentifier: "CommentCellView",
-                                                                           for: indexPath) as! CustomHomeCellView
-//        cell.loadCell(item: home_object_array[indexPath.section])
-        //    cell.publication_description.text = "section \(indexPath.section)"
-//        setOwnerPublication(index: "cell\(indexPath.section)", cell: cell, url: cell.publication_url)
-        
+        let cell: CommentCellView = comment_table_view.dequeueReusableCell(withIdentifier: "CommentCellView",
+                                                                           for: indexPath) as! CommentCellView
+        cell.loadItem(item: comment_object_array[indexPath.row])
+        getCommentOwnerImage(index: indexPath.row, url: comment_object_array[indexPath.row].owner_image, cell: cell)
+
+  
         return cell
     }
     
     func getComment() {
-        Alamofire.request( Utilities.url + "/\(photo_id)/comment/get",
+        Alamofire.request( Utilities.url + "photo/\(photo_id!)/comment/get",
                            method: .get,
                            headers: Me.TOKEN ).responseJSON { response in
                             
                             if let json: JSON = JSON(response.result.value) {
-                                for (_, subJson): (String, JSON) in json {
-                                    self.comment_object_array.append(CommentObject(item: subJson))
+                                for (_, data): (String, JSON) in json {
+                                    for (_, item): (String, JSON) in data {
+                                        self.comment_object_array.append(CommentObject(item: item))
+                                    }
                                 }
                                 self.comment_table_view.reloadData()
                             }
@@ -61,6 +66,16 @@ class PublicationCommentsViewController: UIViewController, UITableViewDataSource
 
     }
     
-    
+    func getCommentOwnerImage(index: Int, url: String, cell: CommentCellView) {
+        if self.comment_owner_image[index] != nil {
+            cell.owner_image.image = self.comment_owner_image[index]!
+            
+        } else {
+            cell.owner_image.imageFromUrl(url_string: url, completion: { (data) in
+                self.comment_owner_image[index] = data
+            })
+        }
+
+    }
 }
 
