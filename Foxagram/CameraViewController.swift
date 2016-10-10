@@ -223,6 +223,8 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate {
         photo_title.becomeFirstResponder()
     }
     
+    
+    
     /*func openCamera(){
      if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera) {
      let imagePicker = UIImagePickerController()
