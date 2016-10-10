@@ -9,9 +9,23 @@
 import UIKit
 import Alamofire
 
+extension UIViewController {
+    func hideKeyboavarhenTappedAround() {
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
+        view.addGestureRecognizer(tap)
+    }
+    
+    func dismissKeyboard() {
+        view.endEditing(true)
+    }
+}
+
 class PublicationCommentsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     @IBOutlet weak var comment_table_view: UITableView!
+    @IBOutlet weak var text_bottom_constraint: NSLayoutConstraint!
+    @IBOutlet weak var comment_textfield: UITextField!
+  
     var comment_object_array = [CommentObject]()
     var comment_owner_image: [Int: UIImage] = [:]
     var photo_id: Int!
@@ -19,6 +33,10 @@ class PublicationCommentsViewController: UIViewController, UITableViewDataSource
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.hideKeyboavarhenTappedAround()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide(_:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
         
         comment_table_view.delegate = self
         comment_table_view.dataSource = self
@@ -26,12 +44,29 @@ class PublicationCommentsViewController: UIViewController, UITableViewDataSource
         comment_table_view.rowHeight = UITableViewAutomaticDimension
         comment_table_view.estimatedRowHeight = 60
         
+        comment_textfield.layer.borderColor = UIColor.lightGray.cgColor
+        
         getComment()
         
     }
     
     override func viewDidAppear(_ animated: Bool) {
         self.comment_table_view.reloadData()
+    }
+    
+    func keyboardWillShow(_ notification: NSNotification) {
+        let info = notification.userInfo!
+        let keyboardFrame: CGRect = (info[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
+        
+        UIView.animate(withDuration: 1.2, animations: { () -> Void in
+            self.text_bottom_constraint.constant = (keyboardFrame.size.height - 50) * -1
+        })
+    }
+    
+    func keyboardWillHide(_ notification: NSNotification) {
+        UIView.animate(withDuration: 1.2, animations: { () -> Void in
+            self.text_bottom_constraint.constant = 0
+        })
     }
     
     internal func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -77,5 +112,27 @@ class PublicationCommentsViewController: UIViewController, UITableViewDataSource
         }
 
     }
+    
+    @IBAction func post_comment(_ sender: UIButton) {
+        let comment = self.comment_textfield.text ?? ""
+        let params: [String : Any] = [ "comment_body": comment,
+                                       "photo_id": self.photo_id ]
+        Alamofire.request( Utilities.url + "photo/comment/new",
+            method: .post,
+            parameters: params,
+            headers: Me.TOKEN ).responseJSON { response in
+                
+                if let json: JSON = JSON(response.result.value) {
+                    self.comment_textfield.text = ""
+                    let last_comment = CommentObject(item: json["comment"])
+                    last_comment.owner_image = Me.PROFILE_IMAGE
+                    last_comment.owner = Me.NAME
+                    self.comment_object_array.append(last_comment)
+                    self.comment_table_view.reloadData()
+                }
+        }
+        
+    }
+    
 }
 

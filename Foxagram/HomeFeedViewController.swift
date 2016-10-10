@@ -16,10 +16,12 @@ extension UIImageView {
             let session = URLSession.shared
             request.httpMethod = "GET"
             
-            session.dataTask(with: request as URLRequest, completionHandler: { data, response, error -> Void in
+            let task = session.dataTask(with: request as URLRequest, completionHandler: { data, response, error -> Void in
                 self.image = UIImage(data: data!)
-                completion(UIImage(data: data!))
-            }).resume()
+                completion(self.image)
+            })
+            
+            task.resume()
 
         }
     }
@@ -39,7 +41,6 @@ class HomeFeedViewController: UIViewController, UITableViewDataSource, UITableVi
         home_table_view.delegate = self
         home_table_view.dataSource = self
         
-        
         home_table_view.rowHeight = UITableViewAutomaticDimension
         home_table_view.estimatedRowHeight = 44
         
@@ -53,7 +54,7 @@ class HomeFeedViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        self.home_table_view.reloadData()
+      //  self.home_table_view.reloadData()
     }
     
     internal func numberOfSections(in tableView: UITableView) -> Int {
@@ -87,6 +88,7 @@ class HomeFeedViewController: UIViewController, UITableViewDataSource, UITableVi
                                                                            for: indexPath) as! CustomHomeCellView
         cell.loadCell(item: home_object_array[indexPath.section])
     //    cell.publication_description.text = "section \(indexPath.section)"
+        cell.publication_image.alpha = 0
         setOwnerPublication(index: "cell\(indexPath.section)", cell: cell, url: cell.publication_url)
      
         return cell
@@ -127,11 +129,13 @@ class HomeFeedViewController: UIViewController, UITableViewDataSource, UITableVi
     func setOwnerPublication(index: String, cell: CustomHomeCellView, url: String) {
         if self.home_publication_image[index] != nil {
             cell.publication_image.image = self.home_publication_image[index]!
-            
+            cell.publication_image.alpha = 1
         } else {
             cell.publication_image.imageFromUrl(url_string: url, completion: { (data) in
-                    self.home_publication_image[index] = data
-                })
+                if data == nil { cell.publication_image.image = UIImage(named: "sad_error") }
+                else { self.home_publication_image[index] = data }
+                cell.publication_image.alpha = 1
+            })
         }
     }
 

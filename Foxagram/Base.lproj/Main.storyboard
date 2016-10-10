@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
@@ -66,7 +66,7 @@
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="heart_icon" translatesAutoresizingMaskIntoConstraints="NO" id="Yyn-bo-gRh">
                                                             <constraints>
                                                                 <constraint firstAttribute="width" secondItem="Yyn-bo-gRh" secondAttribute="height" multiplier="1:1" id="FdY-c5-0GV"/>
-                                                                <constraint firstAttribute="width" constant="18" id="d7N-Mg-gM4"/>
+                                                                <constraint firstAttribute="width" constant="25" id="d7N-Mg-gM4"/>
                                                             </constraints>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="11R-mJ-vZB">
@@ -82,12 +82,11 @@
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="comment_icon" translatesAutoresizingMaskIntoConstraints="NO" id="dzx-uF-xg5" userLabel="comment_icon">
                                                             <constraints>
                                                                 <constraint firstAttribute="width" secondItem="dzx-uF-xg5" secondAttribute="height" multiplier="1:1" id="k4W-vs-FY4"/>
-                                                                <constraint firstAttribute="width" constant="20" id="xwm-5p-cNE"/>
+                                                                <constraint firstAttribute="width" constant="27" id="xwm-5p-cNE"/>
                                                             </constraints>
                                                         </imageView>
                                                     </subviews>
                                                     <constraints>
-                                                        <constraint firstItem="5dk-JF-i1W" firstAttribute="top" secondItem="2AY-PD-CRf" secondAttribute="top" constant="30" id="23D-SC-MYE"/>
                                                         <constraint firstItem="Yyn-bo-gRh" firstAttribute="top" secondItem="2AY-PD-CRf" secondAttribute="top" constant="6" id="8Ke-PR-fzN"/>
                                                         <constraint firstItem="11R-mJ-vZB" firstAttribute="top" secondItem="5dk-JF-i1W" secondAttribute="bottom" constant="5" id="Amu-OW-Dp8"/>
                                                         <constraint firstItem="Yhy-Vb-9u4" firstAttribute="top" secondItem="5dk-JF-i1W" secondAttribute="bottom" constant="5" id="CKX-DC-FTW"/>
@@ -134,7 +133,7 @@
                             <constraint firstItem="Zse-PY-hNB" firstAttribute="top" secondItem="T55-H0-zGr" secondAttribute="bottom" id="pr6-t3-A9o"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item 1" id="vKn-vY-8vM"/>
+                    <tabBarItem key="tabBarItem" title="Item 1" selectedImage="homefeed_icon" id="vKn-vY-8vM"/>
                     <navigationItem key="navigationItem" id="NJc-Qs-sR5"/>
                     <connections>
                         <outlet property="home_table_view" destination="T55-H0-zGr" id="Q7e-Zu-qDq"/>
@@ -144,10 +143,10 @@
             </objects>
             <point key="canvasLocation" x="-1847.2" y="2329.385307346327"/>
         </scene>
-        <!--PublicationCommentsViewController-->
+        <!--Comentarios-->
         <scene sceneID="FMw-Xy-L2b">
             <objects>
-                <viewController storyboardIdentifier="PublicationCommentsViewController" title="PublicationCommentsViewController" id="etU-gn-AOJ" customClass="PublicationCommentsViewController" customModule="Foxagram" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PublicationCommentsViewController" title="Comentarios" id="etU-gn-AOJ" customClass="PublicationCommentsViewController" customModule="Foxagram" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="CUx-II-Fow"/>
                         <viewControllerLayoutGuide type="bottom" id="1He-Ch-N5Y"/>
@@ -209,22 +208,44 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Escribe un comentario" textAlignment="natural" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="3df-Jt-VK0">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="xGm-gV-Qv5"/>
+                                </constraints>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K5e-Oe-1ou">
+                                <state key="normal" title="POST"/>
+                                <connections>
+                                    <action selector="post_comment:" destination="etU-gn-AOJ" eventType="touchUpInside" id="ral-8V-8eg"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="1He-Ch-N5Y" firstAttribute="top" secondItem="2gQ-7k-ySf" secondAttribute="bottom" id="Vjg-Q4-xg1"/>
+                            <constraint firstItem="K5e-Oe-1ou" firstAttribute="leading" secondItem="3df-Jt-VK0" secondAttribute="trailing" constant="5" id="9JI-MB-vhL"/>
+                            <constraint firstItem="3df-Jt-VK0" firstAttribute="bottom" secondItem="1He-Ch-N5Y" secondAttribute="top" id="WKj-is-jjR"/>
+                            <constraint firstItem="3df-Jt-VK0" firstAttribute="top" secondItem="2gQ-7k-ySf" secondAttribute="bottom" id="WMt-o2-3Fj"/>
                             <constraint firstItem="2gQ-7k-ySf" firstAttribute="leading" secondItem="sKC-9v-h9I" secondAttribute="leading" id="WjK-t2-oH4"/>
+                            <constraint firstItem="3df-Jt-VK0" firstAttribute="leading" secondItem="sKC-9v-h9I" secondAttribute="leading" constant="5" id="XtK-Sm-vEi"/>
                             <constraint firstItem="2gQ-7k-ySf" firstAttribute="top" secondItem="CUx-II-Fow" secondAttribute="bottom" id="aHF-Jl-lPl"/>
+                            <constraint firstItem="K5e-Oe-1ou" firstAttribute="bottom" secondItem="3df-Jt-VK0" secondAttribute="bottom" id="bqR-FA-I7J"/>
+                            <constraint firstItem="K5e-Oe-1ou" firstAttribute="top" secondItem="2gQ-7k-ySf" secondAttribute="bottom" id="ngS-aK-MxH"/>
+                            <constraint firstAttribute="trailing" secondItem="K5e-Oe-1ou" secondAttribute="trailing" constant="10" id="oYR-dl-5X3"/>
                             <constraint firstAttribute="trailing" secondItem="2gQ-7k-ySf" secondAttribute="trailing" id="onz-CE-Yre"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="comment_table_view" destination="2gQ-7k-ySf" id="TlM-QJ-SsZ"/>
+                        <outlet property="comment_textfield" destination="3df-Jt-VK0" id="irt-5X-C1u"/>
+                        <outlet property="text_bottom_constraint" destination="WKj-is-jjR" id="tXD-aK-WDb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sXF-Dd-LLc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1847" y="3070"/>
+            <point key="canvasLocation" x="-1847.2" y="3069.7151424287858"/>
         </scene>
         <!--Publication Detail View Controller-->
         <scene sceneID="AST-tB-V1t">
@@ -355,11 +376,13 @@
             </objects>
             <point key="canvasLocation" x="-775" y="2329"/>
         </scene>
-        <!--Item-->
+        <!--Navigation Controller-->
         <scene sceneID="Tcs-dV-hRV">
             <objects>
                 <navigationController id="L5l-ql-B4P" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="mdG-hY-GHw"/>
+                    <tabBarItem key="tabBarItem" title="" image="homefeed_icon" id="mdG-hY-GHw">
+                        <inset key="imageInsets" minX="0.0" minY="5" maxX="0.0" maxY="-5"/>
+                    </tabBarItem>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="ldX-nI-s6m">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -397,11 +420,13 @@
             </objects>
             <point key="canvasLocation" x="36" y="798"/>
         </scene>
-        <!--Item-->
+        <!--Navigation Controller-->
         <scene sceneID="axV-k0-ePw">
             <objects>
                 <navigationController id="YJo-bs-SAZ" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="Uc1-NP-j6F"/>
+                    <tabBarItem key="tabBarItem" title="" image="search_icon" id="Uc1-NP-j6F">
+                        <inset key="imageInsets" minX="0.0" minY="5" maxX="0.0" maxY="-5"/>
+                    </tabBarItem>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="ZxU-vg-vJr">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -414,11 +439,13 @@
             </objects>
             <point key="canvasLocation" x="-775" y="1558"/>
         </scene>
-        <!--Item-->
+        <!--Navigation Controller-->
         <scene sceneID="CE6-iN-A1k">
             <objects>
                 <navigationController restorationIdentifier="CameraTab" id="V1b-mm-ecK" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="kHg-1a-0Cn"/>
+                    <tabBarItem key="tabBarItem" title="" image="camera_icon" id="kHg-1a-0Cn">
+                        <inset key="imageInsets" minX="0.0" minY="5" maxX="0.0" maxY="-5"/>
+                    </tabBarItem>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="5kE-4g-fMQ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -428,11 +455,13 @@
             </objects>
             <point key="canvasLocation" x="201" y="1558"/>
         </scene>
-        <!--Item-->
+        <!--Navigation Controller-->
         <scene sceneID="jW6-5t-T8D">
             <objects>
                 <navigationController id="ezS-Bp-jr5" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="0Mi-zW-h3i"/>
+                    <tabBarItem key="tabBarItem" title="" image="profile_icon" id="0Mi-zW-h3i">
+                        <inset key="imageInsets" minX="0.0" minY="5" maxX="0.0" maxY="-5"/>
+                    </tabBarItem>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="fLN-L4-BwK">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -735,10 +764,14 @@
         </scene>
     </scenes>
     <resources>
+        <image name="camera_icon" width="16" height="16"/>
         <image name="comment_icon" width="16" height="16"/>
         <image name="down_icon" width="16" height="16"/>
         <image name="edit_text_icon" width="16" height="16"/>
         <image name="heart_icon" width="16" height="16"/>
+        <image name="homefeed_icon" width="16" height="16"/>
+        <image name="profile_icon" width="16" height="16"/>
+        <image name="search_icon" width="16" height="16"/>
         <image name="right_icon" width="16" height="16"/>
     </resources>
 </document>

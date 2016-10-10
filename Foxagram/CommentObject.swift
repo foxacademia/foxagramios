@@ -9,11 +9,11 @@
 import Foundation
 
 class CommentObject: NSObject {
-    let owner_id: Int
-    let owner: String
-    let owner_image: String
-    let comment_id: Int
-    let comment_body: String
+    var owner_id: Int
+    var owner: String
+    var owner_image: String
+    var comment_id: Int
+    var comment_body: String
     
     init(item: JSON) {
         self.owner_id = item["user_id"].int ?? 0
