@@ -10,19 +10,23 @@ import UIKit
 import AVFoundation
 import Alamofire
 
-class CameraViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class CameraViewController: UIViewController, UINavigationControllerDelegate {
 
     @IBOutlet var camera_view: UIView!
     @IBOutlet var take_photo_btn: UIButton!
     @IBOutlet var image_preview: UIImageView!
-    @IBOutlet var upload_button: UIButton!
     @IBOutlet var cancel_button: UIButton!
     @IBOutlet var photo_title: UITextField!
+    @IBOutlet var crop_preview: UIView!
+    @IBOutlet var upload_button: UIButton!
+    @IBOutlet var edit_title_button: UIButton!
     
     var session = AVCaptureSession()
     var captureDevice : AVCaptureDevice?
     var stillImageOutput: AVCaptureStillImageOutput = AVCaptureStillImageOutput()
     var videoPreviewLayer = AVCaptureVideoPreviewLayer()
+    
+    var photo_taken: Bool?
     
     override func viewDidAppear(_ animated: Bool) {
         videoPreviewLayer.frame = camera_view.bounds
@@ -55,62 +59,52 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        take_photo_btn.layer.cornerRadius = 30.0
-        image_preview.isHidden = true
-        upload_button.isHidden = true
-        cancel_button.isHidden = true
+        isPhotoTaken(taken: false)
+        initTakePhotoButton()
         
-    }
-
-    /*func openCamera(){
-        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera) {
-            let imagePicker = UIImagePickerController()
-            imagePicker.delegate = self
-            imagePicker.sourceType = UIImagePickerControllerSourceType.camera;
-            imagePicker.allowsEditing = false
-            self.present(imagePicker, animated: true, completion: nil)
-        }
-    }*/
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-
-        self.dismiss(animated: true, completion: nil);
-        
-        let photo = info[UIImagePickerControllerOriginalImage] as? UIImage
-        let imageData = UIImageJPEGRepresentation(photo!, 0.2)
-        
-        Alamofire.upload(
-            multipartFormData: { multipartFormData in
-                multipartFormData.append(imageData!, withName: "photo", fileName: "sd.jepg"
-                    , mimeType: "image/jpeg")
-                multipartFormData.append("title".data(using: String.Encoding.utf8)!, withName: "title")
-            },
-            to: "\(Utilities.url)photo/upload",
-            headers: Me.TOKEN,
-            encodingCompletion: { encodingResult in
-                
-                switch encodingResult {
-                    
-                case .success(let upload, _, _):
-                    upload.responseJSON { response in
-                        print(response)
-                        let json:JSON = JSON(response)
-                        
-                        print(json)
-
-                    }
-                    
-                case .failure(let encodingError):
-                    print("ERROR RESPONSE: \(encodingError)")
-                    
-                }
-                
-            }
-        )
-     
-
+        cancel_button.addTarget(self, action: #selector(CameraViewController.cancelPhoto(_:)), for: .touchDown)
     }
     
+    func initTakePhotoButton(){
+        take_photo_btn.layer.cornerRadius = 35.0
+        take_photo_btn.layer.borderWidth = 5.0
+        take_photo_btn.layer.borderColor = UIColor.white.cgColor
+    }
+    
+    func isPhotoTaken(taken: Bool){
+        if taken == true {
+            self.image_preview.isHidden = false
+            self.upload_button.isHidden = false
+            self.photo_title.isHidden = false
+            self.camera_view.isHidden = true
+            self.take_photo_btn.isHidden = true
+            self.edit_title_button.isHidden = false
+        }else{
+            self.image_preview.isHidden = true
+            self.upload_button.isHidden = true
+            self.photo_title.isHidden = true
+            self.camera_view.isHidden = false
+            self.take_photo_btn.isHidden = false
+            self.edit_title_button.isHidden = true
+        }
+    }
+    
+    
+    func cancelPhoto(_ sender: UIButton){
+        if photo_taken == true {
+            self.isPhotoTaken(taken: false)
+            self.photo_taken = false
+            self.rotateButton(arrow_button: self.cancel_button, toValue: 0)
 
+        }else{
+            self.dismiss(animated: true, completion: nil)
+        }
+    }
+    
+    
+    
+   
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
@@ -128,13 +122,17 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
                     let data_provider = CGDataProvider(data: image_data as! CFData)
                     let cgImageRef = CGImage(jpegDataProviderSource: data_provider!, decode: nil, shouldInterpolate: true, intent: .defaultIntent)
                     
-                    let image = UIImage(cgImage: cgImageRef!, scale: 1.0, orientation: UIImageOrientation.right)
+                    var image = UIImage(cgImage: cgImageRef!, scale: 1.0, orientation: UIImageOrientation.right)
                     
+                    let screenSize: CGRect = UIScreen.main.bounds
+
+                    
+                    image = self.cropToBounds(image: image, width: Double(screenSize.width), height: Double(screenSize.width))
+                    
+                    self.rotateButton(arrow_button: self.cancel_button, toValue: M_PI_2)
+                    self.photo_taken = true
+                    self.isPhotoTaken(taken: true)
                     self.image_preview.image = image
-                    self.image_preview.isHidden = false
-                    self.upload_button.isHidden = false
-                    self.cancel_button.isHidden = false
-                    self.photo_title.isHidden = false
                     
                 }
                 
@@ -168,26 +166,101 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
                     
                 case .failure(let encodingError):
                     print("ERROR RESPONSE: \(encodingError)")
-                    
                 }
-                
             }
         )
-
-    }
-    @IBAction func dismiss(_ sender: AnyObject) {
-        self.dismiss(animated: true, completion: nil)
     }
     
-    /*func resizeImage(image: UIImage, newWidth: CGFloat) -> UIImage {
+    func cropToBounds(image: UIImage, width: Double, height: Double) -> UIImage {
         
-        let scale = newWidth / image.size.width
-        let newHeight = image.size.height * scale
-        UIGraphicsBeginImageContext(CGSize(newWidth, newHeight))
-        image.draw(in: CGRectMake(0, 0, newWidth, newHeight))
-        let newImage = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
+        let contextImage: UIImage = UIImage(cgImage: image.cgImage!)
         
-        return newImage
-    }*/
+        let contextSize: CGSize = contextImage.size
+        
+        var posX: CGFloat = 0.0
+        var posY: CGFloat = 0.0
+        var cgwidth: CGFloat = CGFloat(width)
+        var cgheight: CGFloat = CGFloat(height)
+        
+        // See what size is longer and create the center off of that
+        if contextSize.width > contextSize.height {
+            posX = ((contextSize.width - contextSize.height) / 2)
+            posY = 0
+            cgwidth = contextSize.height
+            cgheight = contextSize.height
+        } else {
+            posX = 0
+            posY = ((contextSize.height - contextSize.width) / 2)
+            cgwidth = contextSize.width
+            cgheight = contextSize.width
+        }
+        
+        let rect: CGRect = CGRect(x: posX, y: posY, width: cgwidth, height: cgheight)
+        
+        // Create bitmap image from context using the rect
+        let imageRef: CGImage = contextImage.cgImage!.cropping(to: rect)!
+        
+        // Create a new image based on the imageRef and rotate back to the original orientation
+        let image: UIImage = UIImage(cgImage: imageRef, scale: image.scale, orientation: image.imageOrientation)
+        
+        return image
+    }
+    
+    func rotateButton(arrow_button: UIButton,  toValue: Any) {
+        let rotationAnimation = CABasicAnimation(keyPath: "transform.rotation")
+        //rotationAnimation.fromValue = 0.0
+        rotationAnimation.toValue = toValue
+        rotationAnimation.duration = 0.3
+        rotationAnimation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseOut)
+
+        //Keep final frame of animations
+        rotationAnimation.fillMode = kCAFillModeForwards;
+        rotationAnimation.isRemovedOnCompletion = false;
+        
+        arrow_button.layer.add(rotationAnimation, forKey: nil)
+    }
+    @IBAction func editTitle(_ sender: AnyObject) {
+        photo_title.becomeFirstResponder()
+    }
+    
+    /*func openCamera(){
+     if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera) {
+     let imagePicker = UIImagePickerController()
+     imagePicker.delegate = self
+     imagePicker.sourceType = UIImagePickerControllerSourceType.camera;
+     imagePicker.allowsEditing = false
+     self.present(imagePicker, animated: true, completion: nil)
+     }
+     }
+     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+     
+     self.dismiss(animated: true, completion: nil);
+     
+     let photo = info[UIImagePickerControllerOriginalImage] as? UIImage
+     let imageData = UIImageJPEGRepresentation(photo!, 0.2)
+     
+     Alamofire.upload(
+     multipartFormData: { multipartFormData in
+     multipartFormData.append(imageData!, withName: "photo", fileName: "sd.jepg"
+     , mimeType: "image/jpeg")
+     multipartFormData.append("title".data(using: String.Encoding.utf8)!, withName: "title")
+     },
+     to: "\(Utilities.url)photo/upload",
+     headers: Me.TOKEN,
+     encodingCompletion: { encodingResult in
+     
+     switch encodingResult {
+     
+     case .success(let upload, _, _):
+     upload.responseJSON { response in
+     print(response)
+     let json:JSON = JSON(response)
+     print(json)
+     }
+     case .failure(let encodingError):
+     print("ERROR RESPONSE: \(encodingError)")
+     }
+     }
+     )
+     }*/
 }

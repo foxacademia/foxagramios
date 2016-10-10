@@ -489,72 +489,110 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uKO-Z2-D3m">
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Ud7-7d-Dcj"/>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DZa-vq-13Q">
-                                <frame key="frameInset" minX="157" minY="462" width="60" height="60"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AAa-xR-OVi">
+                                <frame key="frameInset" minX="312" minY="563" width="40" height="40"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="60" id="HOd-ae-J50"/>
-                                    <constraint firstAttribute="width" constant="60" id="Jdz-Ql-ukw"/>
+                                    <constraint firstAttribute="width" constant="40" id="GlT-fd-oVS"/>
+                                    <constraint firstAttribute="height" constant="40" id="aTE-od-XZL"/>
+                                </constraints>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <state key="normal" backgroundImage="right_icon">
+                                    <color key="titleShadowColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="uploadPhoto:" destination="fhY-Vy-E6T" eventType="touchUpInside" id="bCj-4m-AN3"/>
+                                </connections>
+                            </button>
+                            <view alpha="0.29999999999999999" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="srP-qY-cjh">
+                                <frame key="frameInset" minX="4" minY="111" width="355" height="289"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="srP-qY-cjh" secondAttribute="height" multiplier="1:1" id="Lam-Df-USo"/>
+                                </constraints>
+                            </view>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ud7-7d-Dcj">
+                                <frame key="frameInset" minX="80" minY="250" width="272" height="329"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="Ud7-7d-Dcj" secondAttribute="height" multiplier="1:1" id="Akt-yT-lx0"/>
+                                </constraints>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0TH-bL-5cp">
+                                <frame key="frameInset" minX="303" minY="54" width="40" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="25" id="4d8-4A-icB"/>
+                                    <constraint firstAttribute="height" constant="25" id="bdD-3h-cek"/>
+                                </constraints>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <state key="normal" backgroundImage="edit_text_icon"/>
+                                <connections>
+                                    <action selector="editTitle:" destination="fhY-Vy-E6T" eventType="touchUpInside" id="T0D-mM-FvJ"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DZa-vq-13Q">
+                                <frame key="frameInset" minX="153" minY="548" width="70" height="70"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="70" id="HOd-ae-J50"/>
+                                    <constraint firstAttribute="width" constant="70" id="Jdz-Ql-ukw"/>
                                 </constraints>
                                 <connections>
                                     <action selector="takePhoto:" destination="fhY-Vy-E6T" eventType="touchUpInside" id="Dra-CC-UsE"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N5y-sA-YI6">
-                                <frame key="frameInset" minX="15" minY="515" width="61" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Dismiss"/>
-                                <connections>
-                                    <action selector="dismiss:" destination="fhY-Vy-E6T" eventType="touchUpInside" id="ihp-EJ-cu1"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dUY-op-pyv">
-                                <frame key="frameInset" minX="313" minY="212" width="58" height="30"/>
-                                <state key="normal" title="Upload"/>
-                                <connections>
-                                    <action selector="uploadPhoto:" destination="fhY-Vy-E6T" eventType="touchUpInside" id="HrO-WA-DEg"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YOH-xl-5uI">
-                                <frame key="frameInset" minX="15" minY="477" width="61" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Cancelar"/>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N5y-sA-YI6">
+                                <frame key="frameInset" minX="15" minY="563" width="40" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="40" id="4Fj-tc-vg6"/>
+                                    <constraint firstAttribute="height" constant="40" id="cVD-bG-J7O"/>
+                                </constraints>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <state key="normal" backgroundImage="down_icon">
+                                    <color key="titleShadowColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
                             </button>
                             <textField hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DvK-zX-7uo">
-                                <frame key="frameInset" minY="200" width="312" height="54"/>
+                                <frame key="frameInset" minY="111" width="375" height="54"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="Ud7-7d-Dcj" firstAttribute="top" secondItem="kZ4-by-i9p" secondAttribute="top" id="EB1-uH-zTd"/>
+                            <constraint firstItem="N5y-sA-YI6" firstAttribute="centerY" secondItem="DZa-vq-13Q" secondAttribute="centerY" id="0IB-tI-c4r"/>
+                            <constraint firstAttribute="trailing" secondItem="0TH-bL-5cp" secondAttribute="trailing" constant="15" id="FYk-xU-X2n"/>
+                            <constraint firstItem="Ud7-7d-Dcj" firstAttribute="centerY" secondItem="kZ4-by-i9p" secondAttribute="centerY" id="GO8-Y2-deW"/>
                             <constraint firstAttribute="trailing" secondItem="uKO-Z2-D3m" secondAttribute="trailing" id="GsZ-Oy-nry"/>
-                            <constraint firstItem="dUY-op-pyv" firstAttribute="trailing" secondItem="kZ4-by-i9p" secondAttribute="trailingMargin" id="KnN-am-877"/>
+                            <constraint firstItem="AAa-xR-OVi" firstAttribute="centerY" secondItem="DZa-vq-13Q" secondAttribute="centerY" id="I4k-C1-2dO"/>
+                            <constraint firstAttribute="trailing" secondItem="AAa-xR-OVi" secondAttribute="trailing" constant="15" id="ICa-x8-D8C"/>
+                            <constraint firstItem="srP-qY-cjh" firstAttribute="centerY" secondItem="kZ4-by-i9p" secondAttribute="centerY" id="JRE-Tt-pC2"/>
+                            <constraint firstItem="srP-qY-cjh" firstAttribute="centerX" secondItem="kZ4-by-i9p" secondAttribute="centerX" id="Lls-qz-Cop"/>
+                            <constraint firstItem="DvK-zX-7uo" firstAttribute="top" secondItem="srP-qY-cjh" secondAttribute="top" id="MeS-Gl-hrQ"/>
                             <constraint firstItem="uKO-Z2-D3m" firstAttribute="top" secondItem="kZ4-by-i9p" secondAttribute="top" id="WkG-On-P4k"/>
+                            <constraint firstItem="Ud7-7d-Dcj" firstAttribute="centerX" secondItem="kZ4-by-i9p" secondAttribute="centerX" id="ZgJ-9P-JNC"/>
+                            <constraint firstItem="0TH-bL-5cp" firstAttribute="top" secondItem="fzv-XO-Q9g" secondAttribute="bottom" constant="20" id="aBK-4x-HYg"/>
                             <constraint firstItem="cf3-l6-Ahp" firstAttribute="top" secondItem="DZa-vq-13Q" secondAttribute="bottom" constant="22" id="abz-UM-fDK"/>
                             <constraint firstItem="cf3-l6-Ahp" firstAttribute="top" secondItem="uKO-Z2-D3m" secondAttribute="bottom" id="bP0-UE-gvD"/>
+                            <constraint firstItem="srP-qY-cjh" firstAttribute="width" secondItem="kZ4-by-i9p" secondAttribute="width" id="ex4-UL-3le"/>
+                            <constraint firstItem="N5y-sA-YI6" firstAttribute="leading" secondItem="kZ4-by-i9p" secondAttribute="leading" constant="15" id="f2D-Ac-kgm"/>
                             <constraint firstItem="DZa-vq-13Q" firstAttribute="centerX" secondItem="kZ4-by-i9p" secondAttribute="centerX" id="hev-Wd-a3d"/>
                             <constraint firstItem="DvK-zX-7uo" firstAttribute="leading" secondItem="kZ4-by-i9p" secondAttribute="leading" id="hvI-w7-7y8"/>
-                            <constraint firstItem="Ud7-7d-Dcj" firstAttribute="leading" secondItem="kZ4-by-i9p" secondAttribute="leading" id="hwR-OO-mY1"/>
                             <constraint firstAttribute="trailing" secondItem="DvK-zX-7uo" secondAttribute="trailing" id="ovV-gM-VgG"/>
                             <constraint firstItem="uKO-Z2-D3m" firstAttribute="leading" secondItem="kZ4-by-i9p" secondAttribute="leading" id="rGe-Np-FCH"/>
-                            <constraint firstItem="cf3-l6-Ahp" firstAttribute="top" secondItem="dUY-op-pyv" secondAttribute="bottom" constant="47" id="rr1-mw-cfH"/>
-                            <constraint firstAttribute="trailing" secondItem="Ud7-7d-Dcj" secondAttribute="trailing" id="vCw-5J-Ukz"/>
-                            <constraint firstItem="cf3-l6-Ahp" firstAttribute="top" secondItem="Ud7-7d-Dcj" secondAttribute="bottom" id="yOW-jG-gXB"/>
-                            <constraint firstItem="DvK-zX-7uo" firstAttribute="top" secondItem="fzv-XO-Q9g" secondAttribute="bottom" constant="200" id="zF9-Hy-EdH"/>
+                            <constraint firstItem="Ud7-7d-Dcj" firstAttribute="width" secondItem="kZ4-by-i9p" secondAttribute="width" id="xos-yc-XRW"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="yFo-0A-V5f"/>
                     <connections>
                         <outlet property="camera_view" destination="uKO-Z2-D3m" id="798-hB-RWi"/>
-                        <outlet property="cancel_button" destination="YOH-xl-5uI" id="fzS-Td-dHZ"/>
+                        <outlet property="cancel_button" destination="N5y-sA-YI6" id="j0h-uS-qXo"/>
+                        <outlet property="crop_preview" destination="srP-qY-cjh" id="fAR-FL-mcT"/>
+                        <outlet property="edit_title_button" destination="0TH-bL-5cp" id="vtQ-do-fvZ"/>
                         <outlet property="image_preview" destination="Ud7-7d-Dcj" id="Udr-WN-iSY"/>
                         <outlet property="photo_title" destination="DvK-zX-7uo" id="Ad7-e2-UwT"/>
                         <outlet property="take_photo_btn" destination="DZa-vq-13Q" id="RBG-ZT-YDc"/>
-                        <outlet property="upload_button" destination="dUY-op-pyv" id="OCz-Py-gUE"/>
+                        <outlet property="upload_button" destination="AAa-xR-OVi" id="imo-w6-ikz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2YT-yR-rhy" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -728,9 +766,12 @@
     <resources>
         <image name="camera_icon" width="16" height="16"/>
         <image name="comment_icon" width="16" height="16"/>
+        <image name="down_icon" width="16" height="16"/>
+        <image name="edit_text_icon" width="16" height="16"/>
         <image name="heart_icon" width="16" height="16"/>
         <image name="homefeed_icon" width="16" height="16"/>
         <image name="profile_icon" width="16" height="16"/>
         <image name="search_icon" width="16" height="16"/>
+        <image name="right_icon" width="16" height="16"/>
     </resources>
 </document>
