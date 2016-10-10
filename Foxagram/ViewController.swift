@@ -74,10 +74,9 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate {
                 Alamofire.request("\(Utilities.url)auth/login", method: .post, parameters: params).validate().responseJSON { response in
                     switch response.result {
                     case .success:
-                        if let json_token :JSON = JSON(response.result.value){
-                            print(json_token)
-                            let headers = [ "Authorization": "\(json_token["token"].string!)" ]
-                            Me.TOKEN = headers
+                        if let json :JSON = JSON(response.result.value) {
+                            Me.init(item: json)
+                            
                             self.performSegue(withIdentifier: "init", sender: self)
                         }
                     case .failure:

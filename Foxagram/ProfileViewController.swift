@@ -17,8 +17,8 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource, UICol
     let identifier = "UserPhotosCell"
     let header_identifier = "UserProfileHeader"
     
-    var followers: String = ""
-    var following: String = ""
+    var followers: String!
+    var following: String!
     
     var publication_images: [String: UIImage] = [:]
     
@@ -63,7 +63,7 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource, UICol
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath) as! ProfileViewCell
 
-        if !publications_array.isEmpty{
+        if !publications_array.isEmpty {
             let publication_object = publications_array[indexPath.row] as PublicationObject
             //setOwnerPublication(index: indexPath.row, image_view: cell.publication_image, url: publication_object.photo_url)
             
@@ -72,12 +72,13 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource, UICol
                 cell.publication_image.image = image_saved
             } else {
                 cell.publication_image.imageFromUrl(url_string: publication_object.photo_url, completion: { (data) in
-                    self.publication_images[self.identifier] = data!
+                    self.publication_images[self.identifier] = data
                 })
             }
 
             cell.backgroundColor = .red
         }
+        
         return cell
     }
     
