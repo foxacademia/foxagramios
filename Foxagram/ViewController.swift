@@ -75,6 +75,7 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate {
                     switch response.result {
                     case .success:
                         if let json :JSON = JSON(response.result.value) {
+                            print(response.result.value)
                             Me.init(item: json)
                             
                             self.performSegue(withIdentifier: "init", sender: self)
