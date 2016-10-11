@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Foxagram/CameraViewController.swift"
-            timestampString = "497817865.663639"
+            timestampString = "497893308.991572"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "218"
-            endingLineNumber = "218"
+            startingLineNumber = "227"
+            endingLineNumber = "227"
             landmarkName = "rotateButton(arrow_button:toValue:)"
             landmarkType = "7">
          </BreakpointContent>

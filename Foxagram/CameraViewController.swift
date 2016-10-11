@@ -10,7 +10,7 @@ import UIKit
 import AVFoundation
 import Alamofire
 
-class CameraViewController: UIViewController, UINavigationControllerDelegate {
+class CameraViewController: UIViewController, UINavigationControllerDelegate, UITextFieldDelegate {
 
     @IBOutlet var camera_view: UIView!
     @IBOutlet var take_photo_btn: UIButton!
@@ -59,6 +59,10 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.hideKeyboavarhenTappedAround()
+        self.photo_title.returnKeyType = UIReturnKeyType.done
+        self.photo_title.delegate = self
+        
         isPhotoTaken(taken: false)
         initTakePhotoButton()
         
@@ -100,10 +104,14 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate {
             self.dismiss(animated: true, completion: nil)
         }
     }
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        uploadPhoto(textField)
+        return true
+    }
     
     
-    
-   
+
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -143,12 +151,12 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate {
 
     @IBAction func uploadPhoto(_ sender: AnyObject) {
         let image_to_send = UIImageJPEGRepresentation(self.image_preview.image!, 0.2)
-        
+        let photo_title = self.photo_title.text!
         Alamofire.upload(
             multipartFormData: { multipartFormData in
                 multipartFormData.append(image_to_send!, withName: "photo", fileName: "sd.jepg"
                     , mimeType: "image/jpeg")
-                multipartFormData.append("title".data(using: String.Encoding.utf8)!, withName: "title")
+                multipartFormData.append(photo_title.data(using: String.Encoding.utf8)!, withName: "title")
             },
             to: "\(Utilities.url)photo/upload",
             headers: Me.TOKEN,
@@ -162,6 +170,7 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate {
                         let json:JSON = JSON(response)
                         print(json)
                         self.image_preview.isHidden = true
+                        self.dismiss(animated: true, completion: nil)
                     }
                     
                 case .failure(let encodingError):
@@ -212,7 +221,7 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate {
         rotationAnimation.toValue = toValue
         rotationAnimation.duration = 0.3
         rotationAnimation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseOut)
-
+        
         //Keep final frame of animations
         rotationAnimation.fillMode = kCAFillModeForwards;
         rotationAnimation.isRemovedOnCompletion = false;
