@@ -10,7 +10,7 @@ import UIKit
 import Alamofire
 
 extension UIViewController {
-    func hideKeyboavarhenTappedAround() {
+    func hideKeyboardTappedAround() {
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
         view.addGestureRecognizer(tap)
     }
@@ -33,7 +33,7 @@ class PublicationCommentsViewController: UIViewController, UITableViewDataSource
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.hideKeyboavarhenTappedAround()
+        self.hideKeyboardTappedAround()
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide(_:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
@@ -47,7 +47,6 @@ class PublicationCommentsViewController: UIViewController, UITableViewDataSource
         comment_textfield.layer.borderColor = UIColor.lightGray.cgColor
         
         getComment()
-        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -58,14 +57,14 @@ class PublicationCommentsViewController: UIViewController, UITableViewDataSource
         let info = notification.userInfo!
         let keyboardFrame: CGRect = (info[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
         
-        UIView.animate(withDuration: 1.2, animations: { () -> Void in
-            self.text_bottom_constraint.constant = (keyboardFrame.size.height - 50) * -1
+        UIView.animate(withDuration: 2, animations: { () -> Void in
+            self.text_bottom_constraint.constant = (keyboardFrame.size.height - 45) * -1
         })
     }
     
     func keyboardWillHide(_ notification: NSNotification) {
         UIView.animate(withDuration: 1.2, animations: { () -> Void in
-            self.text_bottom_constraint.constant = 0
+            self.text_bottom_constraint.constant = -5
         })
     }
     
@@ -98,7 +97,6 @@ class PublicationCommentsViewController: UIViewController, UITableViewDataSource
                                 self.comment_table_view.reloadData()
                             }
         }
-
     }
     
     func getCommentOwnerImage(index: Int, url: String, cell: CommentCellView) {
@@ -124,11 +122,16 @@ class PublicationCommentsViewController: UIViewController, UITableViewDataSource
                 
                 if let json: JSON = JSON(response.result.value) {
                     self.comment_textfield.text = ""
-                    let last_comment = CommentObject(item: json["comment"])
+                    let last_comment = CommentObject(item: json)
                     last_comment.owner_image = Me.PROFILE_IMAGE
                     last_comment.owner = Me.NAME
                     self.comment_object_array.append(last_comment)
                     self.comment_table_view.reloadData()
+            
+                    self.comment_table_view.scrollToRow(at: IndexPath(row: self.comment_object_array.count - 1, section: 0),
+                                                        at: UITableViewScrollPosition.bottom,
+                                                        animated: true)
+                    
                 }
         }
         

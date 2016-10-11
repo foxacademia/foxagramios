@@ -13,6 +13,9 @@
 		6D4074831DA5C78C00121325 /* CommentCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D4074821DA5C78C00121325 /* CommentCellView.swift */; };
 		6D40748C1DA5CB4500121325 /* CommentObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D40748B1DA5CB4500121325 /* CommentObject.swift */; };
 		6D44B8761D9C42280018AF9F /* HomeObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D44B8751D9C42280018AF9F /* HomeObject.swift */; };
+		6D7858C31DAC475100B5F16B /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D7858C21DAC475100B5F16B /* SearchViewController.swift */; };
+		6D7858CC1DAC610200B5F16B /* SearchCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D7858CB1DAC610200B5F16B /* SearchCellView.swift */; };
+		6D7858CE1DAC624500B5F16B /* SearchResultObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D7858CD1DAC624500B5F16B /* SearchResultObject.swift */; };
 		6D923E681DA4AABB0082C25C /* PublicationDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D923E671DA4AABB0082C25C /* PublicationDetailViewController.swift */; };
 		6DDCAA761D9F12360086A75F /* CustomHomeCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DDCAA751D9F12360086A75F /* CustomHomeCellView.swift */; };
 		A02BF7FA1DA6B78800EE6F3F /* PublicationObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02BF7F91DA6B78800EE6F3F /* PublicationObject.swift */; };
@@ -118,6 +121,9 @@
 		6D4074821DA5C78C00121325 /* CommentCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentCellView.swift; sourceTree = "<group>"; };
 		6D40748B1DA5CB4500121325 /* CommentObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentObject.swift; sourceTree = "<group>"; };
 		6D44B8751D9C42280018AF9F /* HomeObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeObject.swift; sourceTree = "<group>"; };
+		6D7858C21DAC475100B5F16B /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		6D7858CB1DAC610200B5F16B /* SearchCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchCellView.swift; sourceTree = "<group>"; };
+		6D7858CD1DAC624500B5F16B /* SearchResultObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchResultObject.swift; sourceTree = "<group>"; };
 		6D923E671DA4AABB0082C25C /* PublicationDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PublicationDetailViewController.swift; sourceTree = "<group>"; };
 		6DDCAA751D9F12360086A75F /* CustomHomeCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomHomeCellView.swift; sourceTree = "<group>"; };
 		A02BF7F91DA6B78800EE6F3F /* PublicationObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PublicationObject.swift; sourceTree = "<group>"; };
@@ -208,6 +214,9 @@
 		6DEBFD9B1DA42E1900901E1A /* Search */ = {
 			isa = PBXGroup;
 			children = (
+				6D7858C21DAC475100B5F16B /* SearchViewController.swift */,
+				6D7858CB1DAC610200B5F16B /* SearchCellView.swift */,
+				6D7858CD1DAC624500B5F16B /* SearchResultObject.swift */,
 			);
 			name = Search;
 			sourceTree = "<group>";
@@ -430,16 +439,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6D7858CC1DAC610200B5F16B /* SearchCellView.swift in Sources */,
 				A02BF8031DA6D1BB00EE6F3F /* ProfileViewCell.swift in Sources */,
 				6DDCAA761D9F12360086A75F /* CustomHomeCellView.swift in Sources */,
 				A0BCAF041D95A1BE00B4CE38 /* SwiftyJSON.swift in Sources */,
 				A0BCAF061D99785200B4CE38 /* Me.swift in Sources */,
 				A052DE9C1DA2B90300F207A8 /* ProfileViewController.swift in Sources */,
 				A03774CD1D99D70F007E5C36 /* Utilities.swift in Sources */,
+				6D7858CE1DAC624500B5F16B /* SearchResultObject.swift in Sources */,
 				6D1F67171D9C831B0040668D /* CustomHomeSectionView.swift in Sources */,
 				6D44B8761D9C42280018AF9F /* HomeObject.swift in Sources */,
 				A0BCAF081D99832E00B4CE38 /* HomeFeedViewController.swift in Sources */,
 				6D40748C1DA5CB4500121325 /* CommentObject.swift in Sources */,
+				6D7858C31DAC475100B5F16B /* SearchViewController.swift in Sources */,
 				A02BF8051DA8024F00EE6F3F /* TabBarController.swift in Sources */,
 				A02BF7FA1DA6B78800EE6F3F /* PublicationObject.swift in Sources */,
 				6D923E681DA4AABB0082C25C /* PublicationDetailViewController.swift in Sources */,

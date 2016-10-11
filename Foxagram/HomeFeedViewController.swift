@@ -33,7 +33,6 @@ class HomeFeedViewController: UIViewController, UITableViewDataSource, UITableVi
     var home_object_array = [HomeObject]()
     var home_section_image: [String: UIImage] = [:]
     var home_publication_image: [String: UIImage] = [:]
-    var cell_index: Int = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -132,7 +131,10 @@ class HomeFeedViewController: UIViewController, UITableViewDataSource, UITableVi
             cell.publication_image.alpha = 1
         } else {
             cell.publication_image.imageFromUrl(url_string: url, completion: { (data) in
-                if data == nil { cell.publication_image.image = UIImage(named: "sad_error") }
+                if data == nil {
+                    cell.publication_image.image = UIImage(named: "sad_error")
+                    self.home_publication_image[index] = UIImage(named: "sad_error")
+                }
                 else { self.home_publication_image[index] = data }
                 cell.publication_image.alpha = 1
             })

@@ -47,7 +47,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="435"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" tableViewCell="KP2-om-tOR" id="oN6-5l-vgo">
-                                            <frame key="frameInset" width="375" height="434"/>
+                                            <frame key="frameInset" width="375" height="435"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="VKi-6j-P76">
@@ -133,8 +133,7 @@
                             <constraint firstItem="Zse-PY-hNB" firstAttribute="top" secondItem="T55-H0-zGr" secondAttribute="bottom" id="pr6-t3-A9o"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item 1" selectedImage="homefeed_icon" id="vKn-vY-8vM"/>
-                    <navigationItem key="navigationItem" id="NJc-Qs-sR5"/>
+                    <navigationItem key="navigationItem" title="Home" id="NJc-Qs-sR5"/>
                     <connections>
                         <outlet property="home_table_view" destination="T55-H0-zGr" id="Q7e-Zu-qDq"/>
                     </connections>
@@ -143,10 +142,10 @@
             </objects>
             <point key="canvasLocation" x="-1847.2" y="2329.385307346327"/>
         </scene>
-        <!--Comentarios-->
+        <!--Comments-->
         <scene sceneID="FMw-Xy-L2b">
             <objects>
-                <viewController storyboardIdentifier="PublicationCommentsViewController" title="Comentarios" id="etU-gn-AOJ" customClass="PublicationCommentsViewController" customModule="Foxagram" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PublicationCommentsViewController" title="Comments" id="etU-gn-AOJ" customClass="PublicationCommentsViewController" customModule="Foxagram" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="CUx-II-Fow"/>
                         <viewControllerLayoutGuide type="bottom" id="1He-Ch-N5Y"/>
@@ -159,10 +158,10 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CommentCellView" rowHeight="60" id="XZT-w8-5Yg" customClass="CommentCellView" customModule="Foxagram" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="60"/>
+                                        <rect key="frame" x="0.0" y="28" width="1000" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="XZT-w8-5Yg" id="f5q-Q8-fWh">
-                                            <frame key="frameInset" width="375" height="59"/>
+                                            <frame key="frameInset" width="1000" height="60"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="MJz-tC-jkL">
@@ -172,7 +171,7 @@
                                                     </constraints>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                            <integer key="value" value="15"/>
+                                                            <real key="value" value="17.5"/>
                                                         </userDefinedRuntimeAttribute>
                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                                     </userDefinedRuntimeAttributes>
@@ -208,7 +207,8 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Escribe un comentario" textAlignment="natural" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="3df-Jt-VK0">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Escribe un comentario" textAlignment="natural" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="3df-Jt-VK0">
+                                <color key="backgroundColor" red="0.90009088370000001" green="0.91319910510000002" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="xGm-gV-Qv5"/>
                                 </constraints>
@@ -226,10 +226,10 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="K5e-Oe-1ou" firstAttribute="leading" secondItem="3df-Jt-VK0" secondAttribute="trailing" constant="5" id="9JI-MB-vhL"/>
-                            <constraint firstItem="3df-Jt-VK0" firstAttribute="bottom" secondItem="1He-Ch-N5Y" secondAttribute="top" id="WKj-is-jjR"/>
-                            <constraint firstItem="3df-Jt-VK0" firstAttribute="top" secondItem="2gQ-7k-ySf" secondAttribute="bottom" id="WMt-o2-3Fj"/>
+                            <constraint firstItem="3df-Jt-VK0" firstAttribute="bottom" secondItem="1He-Ch-N5Y" secondAttribute="top" constant="-5" id="WKj-is-jjR"/>
+                            <constraint firstItem="3df-Jt-VK0" firstAttribute="top" secondItem="2gQ-7k-ySf" secondAttribute="bottom" constant="5" id="WMt-o2-3Fj"/>
                             <constraint firstItem="2gQ-7k-ySf" firstAttribute="leading" secondItem="sKC-9v-h9I" secondAttribute="leading" id="WjK-t2-oH4"/>
-                            <constraint firstItem="3df-Jt-VK0" firstAttribute="leading" secondItem="sKC-9v-h9I" secondAttribute="leading" constant="5" id="XtK-Sm-vEi"/>
+                            <constraint firstItem="3df-Jt-VK0" firstAttribute="leading" secondItem="sKC-9v-h9I" secondAttribute="leading" constant="10" id="XtK-Sm-vEi"/>
                             <constraint firstItem="2gQ-7k-ySf" firstAttribute="top" secondItem="CUx-II-Fow" secondAttribute="bottom" id="aHF-Jl-lPl"/>
                             <constraint firstItem="K5e-Oe-1ou" firstAttribute="bottom" secondItem="3df-Jt-VK0" secondAttribute="bottom" id="bqR-FA-I7J"/>
                             <constraint firstItem="K5e-Oe-1ou" firstAttribute="top" secondItem="2gQ-7k-ySf" secondAttribute="bottom" id="ngS-aK-MxH"/>
@@ -357,10 +357,10 @@
             </objects>
             <point key="canvasLocation" x="-1102" y="3070"/>
         </scene>
-        <!--View Controller-->
+        <!--Search-->
         <scene sceneID="hvO-mD-teg">
             <objects>
-                <viewController id="v7x-Gp-3e9" sceneMemberID="viewController">
+                <viewController title="Search" id="v7x-Gp-3e9" customClass="SearchViewController" customModule="Foxagram" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="jmU-YL-wJu"/>
                         <viewControllerLayoutGuide type="bottom" id="Dnw-4Z-Che"/>
@@ -368,13 +368,79 @@
                     <view key="view" contentMode="scaleToFill" id="Q03-yq-hVR">
                         <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="60" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="1KU-pi-ZQO">
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SearchCellView" rowHeight="60" id="HiT-co-Gzb" customClass="SearchCellView" customModule="Foxagram" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="1000" height="60"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="HiT-co-Gzb" id="8D7-h0-Gcw">
+                                            <frame key="frameInset" width="1000" height="60"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="result" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mpa-9k-Cx1">
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="13"/>
+                                                    <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="neR-K4-OJl">
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="35" id="Lns-UN-una"/>
+                                                        <constraint firstAttribute="height" constant="35" id="cEw-2b-K3F"/>
+                                                    </constraints>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                            <real key="value" value="17.5"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                                    </userDefinedRuntimeAttributes>
+                                                </imageView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="neR-K4-OJl" firstAttribute="centerY" secondItem="8D7-h0-Gcw" secondAttribute="centerY" id="LdS-nz-lnG"/>
+                                                <constraint firstItem="Mpa-9k-Cx1" firstAttribute="leading" secondItem="neR-K4-OJl" secondAttribute="trailing" constant="15" id="O02-sB-yEy"/>
+                                                <constraint firstItem="neR-K4-OJl" firstAttribute="leading" secondItem="8D7-h0-Gcw" secondAttribute="leading" constant="15" id="sBq-CT-biL"/>
+                                                <constraint firstItem="Mpa-9k-Cx1" firstAttribute="centerY" secondItem="8D7-h0-Gcw" secondAttribute="centerY" id="uzo-jl-Iv2"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="search_result_image" destination="neR-K4-OJl" id="tyg-gs-2IZ"/>
+                                            <outlet property="search_result_name" destination="Mpa-9k-Cx1" id="o66-H2-HNu"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Busqueda" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="0ov-4f-yCH">
+                                <color key="backgroundColor" red="0.90009088366890377" green="0.9131991051454138" blue="0.93333333333333335" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="LQV-0f-CF7"/>
+                                </constraints>
+                                <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="search"/>
+                            </textField>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="1KU-pi-ZQO" firstAttribute="top" secondItem="0ov-4f-yCH" secondAttribute="bottom" constant="5" id="3Hp-OP-x61"/>
+                            <constraint firstItem="0ov-4f-yCH" firstAttribute="leading" secondItem="Q03-yq-hVR" secondAttribute="leading" constant="15" id="FF9-vN-ig9"/>
+                            <constraint firstAttribute="trailing" secondItem="0ov-4f-yCH" secondAttribute="trailing" constant="15" id="JDs-PP-jtn"/>
+                            <constraint firstItem="1KU-pi-ZQO" firstAttribute="leading" secondItem="Q03-yq-hVR" secondAttribute="leading" id="RCD-JD-7Q1"/>
+                            <constraint firstItem="0ov-4f-yCH" firstAttribute="top" secondItem="jmU-YL-wJu" secondAttribute="bottom" constant="10" id="cCO-6x-WRL"/>
+                            <constraint firstAttribute="trailing" secondItem="1KU-pi-ZQO" secondAttribute="trailing" id="wnB-1e-FGD"/>
+                            <constraint firstItem="Dnw-4Z-Che" firstAttribute="top" secondItem="1KU-pi-ZQO" secondAttribute="bottom" id="y8f-sr-OEi"/>
+                        </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="15J-Jj-RVs"/>
+                    <navigationItem key="navigationItem" title="Search" id="15J-Jj-RVs"/>
+                    <connections>
+                        <outlet property="search_table_view" destination="1KU-pi-ZQO" id="8P3-di-rgR"/>
+                        <outlet property="search_text_body" destination="0ov-4f-yCH" id="uKT-nb-tRv"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TES-u7-SDu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-775" y="2329"/>
+            <point key="canvasLocation" x="-775.20000000000005" y="2328.4857571214393"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Tcs-dV-hRV">
@@ -599,7 +665,7 @@
             </objects>
             <point key="canvasLocation" x="200.80000000000001" y="2328.4857571214393"/>
         </scene>
-        <!--Perfil-->
+        <!--Profile-->
         <scene sceneID="m8g-31-tWK">
             <objects>
                 <viewController id="t6k-S0-Ece" customClass="ProfileViewController" customModule="Foxagram" customModuleProvider="target" sceneMemberID="viewController">
@@ -753,7 +819,7 @@
                             <constraint firstAttribute="trailing" secondItem="jib-r9-UYi" secondAttribute="trailing" id="u7z-w0-qOR"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Perfil" id="yBK-Ct-PpI"/>
+                    <navigationItem key="navigationItem" title="Profile" id="yBK-Ct-PpI"/>
                     <connections>
                         <outlet property="collection_view" destination="jib-r9-UYi" id="dTh-Nl-LAh"/>
                     </connections>
@@ -771,7 +837,7 @@
         <image name="heart_icon" width="16" height="16"/>
         <image name="homefeed_icon" width="16" height="16"/>
         <image name="profile_icon" width="16" height="16"/>
-        <image name="search_icon" width="16" height="16"/>
         <image name="right_icon" width="16" height="16"/>
+        <image name="search_icon" width="16" height="16"/>
     </resources>
 </document>
