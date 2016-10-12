@@ -69,7 +69,7 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate {
                     "names" : names,
                     "surnames": surnames,
                     "email": email,
-                    "user_image": "https://graph.facebook.com/\(json["id"].string!)/picture?type=large"]
+                    "user_image": "https://graph.facebook.com/\(json["id"].string!)/picture?type=normal"]
 
                 Alamofire.request("\(Utilities.url)auth/login", method: .post, parameters: params).validate().responseJSON { response in
                     switch response.result {

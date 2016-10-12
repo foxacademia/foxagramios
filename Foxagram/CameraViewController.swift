@@ -59,7 +59,7 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate, UI
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.hideKeyboavarhenTappedAround()
+        self.hideKeyboardTappedAround()
         self.photo_title.returnKeyType = UIReturnKeyType.done
         self.photo_title.delegate = self
         

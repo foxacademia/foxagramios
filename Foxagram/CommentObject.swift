@@ -19,7 +19,7 @@ class CommentObject: NSObject {
         self.owner_id = item["user_id"].int ?? 0
         self.owner = item["User"]["names"].string ?? ""
         self.owner_image = item["User"]["user_image"].string ?? ""
-        self.comment_id = item["comment_id"].int ?? 0
+        self.comment_id = item["id"].int ?? 0
         self.comment_body = item["comment_body"].string ?? ""
     }
 }

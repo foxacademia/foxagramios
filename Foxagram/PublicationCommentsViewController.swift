@@ -74,13 +74,33 @@ class PublicationCommentsViewController: UIViewController, UITableViewDataSource
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell: CommentCellView = comment_table_view.dequeueReusableCell(withIdentifier: "CommentCellView",
-                                                                           for: indexPath) as! CommentCellView
+        let cell: CommentCellView = comment_table_view.dequeueReusableCell(withIdentifier: "CommentCellView",                                                                                                             for: indexPath) as! CommentCellView
         cell.loadItem(item: comment_object_array[indexPath.row])
         getCommentOwnerImage(index: indexPath.row, url: comment_object_array[indexPath.row].owner_image, cell: cell)
 
-  
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        let delete = UITableViewRowAction(style: .destructive, title: "Delete") { action, index in
+            self.deleteComment(index: index.last!)
+            tableView.setEditing(false, animated: true)
+            self.comment_object_array.remove(at: indexPath.row)
+            self.comment_table_view.deleteRows(at: [indexPath], with: UITableViewRowAnimation.left)
+        }
+        
+        delete.backgroundColor = UIColor.red
+        
+        return [delete]
+    }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        // the cells you would like the actions to appear needs to be editable
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        // you need to implement this method too or you can't swipe to display the actions
     }
     
     func getComment() {
@@ -94,7 +114,7 @@ class PublicationCommentsViewController: UIViewController, UITableViewDataSource
                                         self.comment_object_array.append(CommentObject(item: item))
                                     }
                                 }
-                                self.comment_table_view.reloadData()
+//                                self.comment_table_view.reloadData()
                             }
         }
     }
@@ -135,6 +155,21 @@ class PublicationCommentsViewController: UIViewController, UITableViewDataSource
                 }
         }
         
+    }
+    
+    func deleteComment(index: Int) {
+        
+        let params: [String: Int] = [ "comment_id": self.comment_object_array[index].comment_id ]
+        Alamofire.request( Utilities.url + "photo/comment/delete",
+                           method: .put,
+                           parameters: params,
+                           headers: Me.TOKEN ).responseJSON { response in
+        
+                            if let json: JSON = JSON(response.result.value) {
+                                self.comment_table_view.reloadData()
+                            }
+        }
+
     }
     
 }

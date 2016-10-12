@@ -40,6 +40,7 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
         let cell: SearchCellView = search_table_view.dequeueReusableCell(withIdentifier: "SearchCellView",
                                                                            for: indexPath) as! SearchCellView
         cell.loadItem(item: search_object_array[indexPath.row])
+        cell.search_result_image.alpha = 0
         getSearchResultImage(index: indexPath.row, url: search_object_array[indexPath.row].search_result_image, cell: cell)
         
         
@@ -72,12 +73,18 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
     func getSearchResultImage(index: Int, url: String, cell: SearchCellView) {
         if self.search_result_image_array[index] != nil {
             cell.search_result_image.image = self.search_result_image_array[index]!
+            cell.search_result_image.alpha = 1
             
         } else {
             cell.search_result_image.imageFromUrl(url_string: url, completion: { (data) in
-                self.search_result_image_array[index] = data
+                if data == nil {
+                    cell.search_result_image.image = UIImage(named: "sad_error")
+                    self.search_result_image_array[index] = UIImage(named: "sad_error")
+                }
+                else { self.search_result_image_array[index] = data }
+                cell.search_result_image.alpha = 1
+                
             })
         }
-        
     }
 }
