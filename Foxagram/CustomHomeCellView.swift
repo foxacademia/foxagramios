@@ -21,6 +21,6 @@ class CustomHomeCellView: UITableViewCell {
         publication_url = Utilities.photo_url + "\(item.owner_id)/\(item.photo_name)"
         publication_owner.text = item.owner
         publication_description.text = item.photo_title
-        publication_date.text = Utilities.friendlyDate(date: item.date)
+//        publication_date.text = Utilities.friendlyDate(date: item.date)
     }
 }
