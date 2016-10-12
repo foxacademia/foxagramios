@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
@@ -44,10 +44,10 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="CustomHomeCellView" rowHeight="435" id="KP2-om-tOR" customClass="CustomHomeCellView" customModule="Foxagram" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="435"/>
+                                        <rect key="frame" x="0.0" y="28" width="1000" height="435"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" tableViewCell="KP2-om-tOR" id="oN6-5l-vgo">
-                                            <frame key="frameInset" width="375" height="435"/>
+                                            <frame key="frameInset" width="1000" height="435"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="VKi-6j-P76">
@@ -250,7 +250,7 @@
         <!--Publication Detail View Controller-->
         <scene sceneID="AST-tB-V1t">
             <objects>
-                <viewController id="LrL-eu-TQa" customClass="PublicationDetailViewController" customModule="Foxagram" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PublicationDetailViewController" id="LrL-eu-TQa" customClass="PublicationDetailViewController" customModule="Foxagram" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="oNt-Pq-l8B"/>
                         <viewControllerLayoutGuide type="bottom" id="R94-zK-VWB"/>
@@ -317,10 +317,18 @@
                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="comment_icon" translatesAutoresizingMaskIntoConstraints="NO" id="ToQ-Qg-8vA" userLabel="comment_icon">
+                                        <frame key="frameInset" minX="51" minY="1" width="27" height="27"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="27" id="LiX-kJ-oiB"/>
+                                            <constraint firstAttribute="width" constant="27" id="Q5d-gO-s7U"/>
+                                        </constraints>
+                                    </imageView>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="rnl-U7-w9a" firstAttribute="leading" secondItem="sRC-Ag-KkV" secondAttribute="leading" constant="15" id="8Tq-Os-DCL"/>
                                     <constraint firstItem="tPZ-xK-NEC" firstAttribute="leading" secondItem="ZYo-zP-zv2" secondAttribute="trailing" constant="5" id="Ike-iw-t6N"/>
+                                    <constraint firstItem="ToQ-Qg-8vA" firstAttribute="centerY" secondItem="rnl-U7-w9a" secondAttribute="centerY" id="MgL-jI-ewF"/>
                                     <constraint firstAttribute="bottom" secondItem="tPZ-xK-NEC" secondAttribute="bottom" id="Pzg-eP-c6S"/>
                                     <constraint firstItem="ZYo-zP-zv2" firstAttribute="leading" secondItem="sRC-Ag-KkV" secondAttribute="leading" constant="15" id="ZMc-GQ-c6r"/>
                                     <constraint firstItem="rnl-U7-w9a" firstAttribute="top" secondItem="sRC-Ag-KkV" secondAttribute="top" constant="5" id="bkn-s7-mtQ"/>
@@ -330,6 +338,7 @@
                                     <constraint firstAttribute="height" constant="60" id="qE3-UV-eRm"/>
                                     <constraint firstItem="ZYo-zP-zv2" firstAttribute="top" secondItem="7Yz-Ec-SUl" secondAttribute="bottom" constant="5" id="rRP-Tk-2jk"/>
                                     <constraint firstItem="7Yz-Ec-SUl" firstAttribute="top" secondItem="sRC-Ag-KkV" secondAttribute="top" constant="30" id="rsw-nZ-OHK"/>
+                                    <constraint firstItem="ToQ-Qg-8vA" firstAttribute="leading" secondItem="rnl-U7-w9a" secondAttribute="trailing" constant="10" id="wBY-f2-mrH"/>
                                     <constraint firstAttribute="bottom" secondItem="ZYo-zP-zv2" secondAttribute="bottom" id="wNf-Te-jld"/>
                                 </constraints>
                             </view>
@@ -348,8 +357,12 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="comments_image" destination="ToQ-Qg-8vA" id="daE-KB-JV2"/>
+                        <outlet property="love_image" destination="rnl-U7-w9a" id="NB9-A0-XvV"/>
                         <outlet property="owner_image" destination="Otw-RV-KQO" id="2XU-dz-Bi8"/>
                         <outlet property="owner_name" destination="yy7-Ig-hko" id="ZnT-pD-dSg"/>
+                        <outlet property="owner_name_title" destination="ZYo-zP-zv2" id="rlN-az-anS"/>
+                        <outlet property="photo_title" destination="tPZ-xK-NEC" id="DEd-dq-Jdf"/>
                         <outlet property="publication_image" destination="SeC-1i-mpL" id="KZg-cP-EKY"/>
                     </connections>
                 </viewController>
@@ -803,6 +816,7 @@
                                         <outlet property="following_label" destination="1im-J1-W50" id="Iup-EM-evz"/>
                                         <outlet property="publications_label" destination="hYW-aW-Byw" id="kKI-6L-fvJ"/>
                                         <outlet property="user_image" destination="Our-Qf-Cox" id="3td-FQ-8kv"/>
+                                        <outlet property="user_name_label" destination="qPZ-kt-Jrf" id="BzC-ll-DZN"/>
                                     </connections>
                                 </collectionReusableView>
                                 <connections>

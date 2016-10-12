@@ -14,6 +14,7 @@ class ProfileHeader: UICollectionReusableView {
     @IBOutlet var followers_label: UILabel!
     @IBOutlet var following_label: UILabel!
     
+    @IBOutlet var user_name_label: UILabel!
     @IBOutlet var user_image: UIImageView!
     
 }

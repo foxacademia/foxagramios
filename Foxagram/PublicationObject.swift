@@ -25,14 +25,12 @@ class PublicationObject: NSObject {
         self.photo_url = item["photo_url"].string ?? ""
     }
     
-    init(photo_id: Int, photo_name: String, owner_image: String, owner: String, owner_id: Int){
+    init(photo_id: Int, photo_name: String, owner_image: String, owner: String, owner_id: Int, photo_title: String){
         self.photo_id = photo_id
+        self.owner_id = owner_id
         self.photo_url = Utilities.photo_url + "\(owner_id)/\(photo_name)"
         self.owner_image = owner_image
         self.owner = owner;
-        
-        self.owner_id = 0
-        self.photo_title = ""
-        
+        self.photo_title = photo_title
     }
 }
