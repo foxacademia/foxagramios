@@ -85,18 +85,12 @@ class HomeFeedViewController: UIViewController, UITableViewDataSource, UITableVi
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: CustomHomeCellView = home_table_view.dequeueReusableCell(withIdentifier: "CustomHomeCellView",
                                                                            for: indexPath) as! CustomHomeCellView
-        cell.loadCell(item: home_object_array[indexPath.section])
+        cell.loadCell(item: home_object_array[indexPath.section], parent_view_controller: self)
     //    cell.publication_description.text = "section \(indexPath.section)"
         cell.publication_image.alpha = 0
         setOwnerPublication(index: "cell\(indexPath.section)", cell: cell, url: cell.publication_url)
      
         return cell
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let view_controller = self.storyboard!.instantiateViewController(withIdentifier: "PublicationCommentsViewController") as! PublicationCommentsViewController
-        view_controller.photo_id = home_object_array[indexPath.section].photo_id
-        self.navigationController?.pushViewController(view_controller, animated: true)
     }
     
     func getHome() {

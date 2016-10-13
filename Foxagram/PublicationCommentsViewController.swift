@@ -82,16 +82,24 @@ class PublicationCommentsViewController: UIViewController, UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-        let delete = UITableViewRowAction(style: .destructive, title: "Delete") { action, index in
-            self.deleteComment(index: index.last!)
-            tableView.setEditing(false, animated: true)
-            self.comment_object_array.remove(at: indexPath.row)
-            self.comment_table_view.deleteRows(at: [indexPath], with: UITableViewRowAnimation.left)
+        var actions = [UITableViewRowAction]()
+        let action = UITableViewRowAction(style: .normal, title: "(:") { action, index in
+        }
+        action.backgroundColor = UIColor.lightGray
+        actions.append(action)
+        if self.comment_object_array[indexPath.row].owner_id == Me.USER_ID {
+            let delete = UITableViewRowAction(style: .destructive, title: "Delete") { action, index in
+                self.deleteComment(index: index.last!)
+                tableView.setEditing(false, animated: true)
+                self.comment_object_array.remove(at: indexPath.row)
+                self.comment_table_view.deleteRows(at: [indexPath], with: UITableViewRowAnimation.left)
+            }
+            
+            delete.backgroundColor = UIColor.red
+            actions.insert(delete, at: 0)
         }
         
-        delete.backgroundColor = UIColor.red
-        
-        return [delete]
+        return actions
     }
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
@@ -100,6 +108,7 @@ class PublicationCommentsViewController: UIViewController, UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        print("hey")
         // you need to implement this method too or you can't swipe to display the actions
     }
     
@@ -114,7 +123,7 @@ class PublicationCommentsViewController: UIViewController, UITableViewDataSource
                                         self.comment_object_array.append(CommentObject(item: item))
                                     }
                                 }
-//                                self.comment_table_view.reloadData()
+                                self.comment_table_view.reloadData()
                             }
         }
     }

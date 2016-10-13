@@ -22,10 +22,14 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate {
         }else{
             print("Not logged in")
         }
-
+        
+        let background = Utilities.Colors
+        background.frame = self.view.bounds
+        self.view.layer.insertSublayer(background, at: 0)
+        
         let loginButton = FBSDKLoginButton()
         loginButton.readPermissions = ["public_profile", "email"]
-        loginButton.center = self.view.center
+        loginButton.center = CGPoint(x: self.view.frame.width / 2, y: self.view.frame.height - 50)
 
         loginButton.delegate = self
 

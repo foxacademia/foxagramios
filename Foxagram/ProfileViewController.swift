@@ -13,30 +13,36 @@ import AlamofireImage
 class ProfileViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
 
     @IBOutlet var collection_view: UICollectionView!
+    
     var publications_array: [PublicationObject] = [PublicationObject]()
     
     let identifier = "UserPhotosCell"
     let header_identifier = "UserProfileHeader"
     
     var followers: String!
-    var following: String!
+    var followings: String!
+    var following: Bool!
     var user_image_url: String = ""
     var user_name: String = ""
-    
+    var user_id: Int = 0
+    var frame_width: CGFloat!
+    var cell_size: CGFloat = 100.0
     var publication_images: [String: UIImage] = [:]
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        Alamofire.request("\(Utilities.url)user/get/profile/\(Me.USER_ID!)", method: .get, headers: Me.TOKEN).responseJSON { response in
+        if user_id == 0 { user_id = Me.USER_ID }
+        Alamofire.request("\(Utilities.url)user/get/profile/\(user_id)", method: .get, headers: Me.TOKEN).responseJSON { response in
             
             let json:JSON = JSON(response.result.value)
             
             print(json)
             for (_, subJson): (String, JSON) in json["profile"] {
+                print(subJson)
                 self.followers = subJson["followers"].string ?? "0"
-                self.following = subJson["following"].string ?? "0"
+                self.followings = subJson["followings"].string ?? "0"
             }
             
             self.user_image_url = json["user_info"]["user_image"].string ?? ""
@@ -49,27 +55,31 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource, UICol
                 let owner_id = subJson["user_id"].int!
                 let photo_title = subJson["title"].string!
                 
-
                 let publication_object = PublicationObject(photo_id: photo_id, photo_name: photo_name, owner_image: "", owner: "", owner_id: owner_id, photo_title: photo_title)
                 
                 self.publications_array.append(publication_object)
             }
             
             self.collection_view.reloadData()
-          
         }
         
         
-
-    }
-    override func viewDidAppear(_ animated: Bool) {
-        self.collection_view.reloadData()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        self.collection_view.reloadData()
+        frame_width = self.collection_view.frame.size.width
+        cell_size = (self.frame_width / 3) - 4
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: IndexPath) -> CGSize {
+        
+        return CGSize(width: cell_size, height: cell_size)
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -77,10 +87,7 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource, UICol
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
-        
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath) as! ProfileViewCell
-        
         let cell_identifier = "Cell\(indexPath.row)"
 
         if !publications_array.isEmpty {
@@ -100,13 +107,11 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource, UICol
                     if let image = response.result.value {
                         cell.publication_image.image = image
                         self.publication_images[cell_identifier] = image
-                    }else{
+                    } else {
                         cell.publication_image.image = UIImage(named: "sad_error")
                         self.publication_images[cell_identifier] = cell.publication_image.image
-
                     }
                     cell.publication_image.alpha = 1
-
                 }
             }
         }
@@ -115,13 +120,18 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource, UICol
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        print("TIPO HEADER \(kind)")
+
         let header_view: ProfileHeader = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: header_identifier, for: indexPath) as! ProfileHeader
         
+        header_view.user_id = self.user_id
         header_view.followers_label.text = followers
         header_view.following_label.text = following
         header_view.publications_label.text = "\(publications_array.count)"
         header_view.user_name_label.text = "\(user_name)"
+        
+        header_view.follow_button.layer.borderWidth = 1
+        header_view.follow_button.layer.borderColor = Utilities.accent_color.cgColor
+        header_view.follow_button.layer.cornerRadius = 3
         
         Alamofire.request(self.user_image_url).responseImage { response in
             if let image = response.result.value{
@@ -138,7 +148,6 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource, UICol
         let view_controller = self.storyboard!.instantiateViewController(withIdentifier: "PublicationDetailViewController") as! PublicationDetailViewController
         //view_controller.photo_id = publications_array[indexPath.row].photo_id
         let profile_cell = collectionView.cellForItem(at: indexPath) as! ProfileViewCell
-        
         
         view_controller.publication_image_value = profile_cell.publication_image.image
         view_controller.owner_name_value = publications_array[indexPath.row].owner

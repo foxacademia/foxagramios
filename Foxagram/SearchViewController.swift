@@ -21,7 +21,6 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.hideKeyboardTappedAround()
         
         search_table_view.delegate = self
         search_table_view.dataSource = self
@@ -43,10 +42,15 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
         cell.search_result_image.alpha = 0
         getSearchResultImage(index: indexPath.row, url: search_object_array[indexPath.row].search_result_image, cell: cell)
         
-        
         return cell
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let view_controller = self.storyboard!.instantiateViewController(withIdentifier: "ProfileViewController") as! ProfileViewController
+        view_controller.user_id = search_object_array[indexPath.row].search_result_id
+        self.navigationController?.pushViewController(view_controller, animated: true)
+    }
+
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {   //delegate method
         textField.resignFirstResponder()
         getSearch(text: textField.text!)
@@ -56,9 +60,11 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
     func getSearch(text: String) {
         search_object_array.removeAll()
         search_result_image_array.removeAll()
-        Alamofire.request( Utilities.url + "user/search/\(text)",
-                           method: .get,
-                           headers: Me.TOKEN ).responseJSON { response in
+        
+        if text != "" {
+            Alamofire.request( Utilities.url + "user/search/\(text)",
+                               method: .get,
+                               headers: Me.TOKEN ).responseJSON { response in
                             
                             if let json: JSON = JSON(response.result.value) {
                                 for (_, subJson): (String, JSON) in json {
@@ -66,6 +72,7 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
                                 }
                                 self.search_table_view.reloadData()
                             }
+            }
         }
         
     }
