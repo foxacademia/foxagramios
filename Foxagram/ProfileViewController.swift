@@ -16,9 +16,9 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource, UICol
     var publications_array: [HomeObject] = [HomeObject]()
     let identifier = "UserPhotosCell"
     let header_identifier = "UserProfileHeader"
-    var following: Bool!
-    var followers: Int!
-    var followings: Int!
+    var following: Bool = false
+    var followers: Int = 0
+    var followings: Int = 0
     var user_image_url: String = ""
     var user_name: String = ""
     var user_id: Int = 0
@@ -37,7 +37,7 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource, UICol
 
             print(json)
             self.followers = json["profile"][0]["followers"].int ?? 0
-            self.following = json["profile"][0]["followings"].int ?? 0
+            self.followings = json["profile"][0]["followings"].int ?? 0
             self.following = json["profile"][0]["following"].bool ?? false
 
             self.user_image_url = json["user_info"]["user_image"].string ?? ""
@@ -56,7 +56,6 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource, UICol
 
                 self.publications_array.append(publication_object)
             }
-
             self.collection_view.reloadData()
         }
 
@@ -121,13 +120,24 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource, UICol
 
         header_view.user_id = self.user_id
         header_view.followers_label.text = "\(followers)"
-        header_view.following_label.text = "\(following)"
+        header_view.following_label.text = "\(followings)"
         header_view.publications_label.text = "\(publications_array.count)"
         header_view.user_name_label.text = "\(user_name)"
+        
+        if self.following {
+            header_view.follow_button.layer.borderWidth = 0
+            header_view.follow_button.backgroundColor = Utilities.accent_color
+            header_view.follow_button.setTitle("FOLLOWING", for: UIControlState.normal)
+            header_view.follow_button.setTitleColor(UIColor.white, for: UIControlState.normal)
+        } else {
+            header_view.follow_button.layer.borderWidth = 1
+            header_view.follow_button.layer.borderColor = Utilities.accent_color.cgColor
+            header_view.follow_button.layer.cornerRadius = 3
+            header_view.follow_button.backgroundColor = UIColor.white
+            header_view.follow_button.setTitleColor(Utilities.accent_color, for: UIControlState.normal)
+        }
 
-        header_view.follow_button.layer.borderWidth = 1
-        header_view.follow_button.layer.borderColor = Utilities.accent_color.cgColor
-        header_view.follow_button.layer.cornerRadius = 3
+   
 
         Alamofire.request(self.user_image_url).responseImage { response in
             if let image = response.result.value{

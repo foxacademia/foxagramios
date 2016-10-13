@@ -37,6 +37,8 @@ class ProfileHeader: UICollectionReusableView {
                                     self.follow_button.layer.borderWidth = 1
                                     self.follow_button.layer.borderColor = Utilities.accent_color.cgColor
                                     self.follow_button.backgroundColor = UIColor.white
+                                    self.follow_button.setTitle("FOLLOW", for: UIControlState.normal)
+                                    self.follow_button.setTitleColor(Utilities.accent_color, for: UIControlState.normal)
                                 }
                             }
         }
