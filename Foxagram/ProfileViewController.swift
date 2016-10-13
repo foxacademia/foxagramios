@@ -13,13 +13,13 @@ import AlamofireImage
 class ProfileViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
 
     @IBOutlet var collection_view: UICollectionView!
-    var publications_array: [PublicationObject] = [PublicationObject]()
+    var publications_array: [HomeObject] = [HomeObject]()
     
     let identifier = "UserPhotosCell"
     let header_identifier = "UserProfileHeader"
     
-    var followers: String!
-    var following: String!
+    var followers: Int!
+    var following: Int!
     var user_image_url: String = ""
     var user_name: String = ""
     
@@ -34,23 +34,23 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource, UICol
             let json:JSON = JSON(response.result.value)
             
             print(json)
-            for (_, subJson): (String, JSON) in json["profile"] {
-                self.followers = subJson["followers"].string ?? "0"
-                self.following = subJson["following"].string ?? "0"
-            }
+            
+            self.followers = json["profile"][0]["followers"].int ?? 0
+            self.following = json["profile"][0]["following"].int ?? 0
             
             self.user_image_url = json["user_info"]["user_image"].string ?? ""
             self.user_name = json["user_info"]["names"].string ?? ""
-
+            
             
             for (_, subJson): (String, JSON) in json["photos"] {
                 let photo_id = subJson["id"].int!
                 let photo_name = subJson["file_name"].string!
                 let owner_id = subJson["user_id"].int!
                 let photo_title = subJson["title"].string!
-                
+                let loves = subJson["loves"].int!
+                let loved = subJson["loved"].bool!
 
-                let publication_object = PublicationObject(photo_id: photo_id, photo_name: photo_name, owner_image: "", owner: "", owner_id: owner_id, photo_title: photo_title)
+                let publication_object = HomeObject(photo_id: photo_id, photo_name: photo_name, owner_image: "", owner: "", owner_id: owner_id, photo_title: photo_title, loved: loved, loves: loves)
                 
                 self.publications_array.append(publication_object)
             }
@@ -86,7 +86,7 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource, UICol
         if !publications_array.isEmpty {
             cell.publication_image.alpha = 0
 
-            let publication_object = publications_array[indexPath.row] as PublicationObject
+            let publication_object = publications_array[indexPath.row] as HomeObject
             //setOwnerPublication(index: indexPath.row, image_view: cell.publication_image, url: publication_object.photo_url)
             
             if (self.publication_images[cell_identifier] != nil){
@@ -115,11 +115,10 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource, UICol
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        print("TIPO HEADER \(kind)")
         let header_view: ProfileHeader = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: header_identifier, for: indexPath) as! ProfileHeader
         
-        header_view.followers_label.text = followers
-        header_view.following_label.text = following
+        header_view.followers_label.text = "\(followers)"
+        header_view.following_label.text = "\(following)"
         header_view.publications_label.text = "\(publications_array.count)"
         header_view.user_name_label.text = "\(user_name)"
         
@@ -129,16 +128,16 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource, UICol
             }
         }
         //header_view.sectionLabel.text = dataSource.gettGroupLabelAtIndex(indexPath.section)
-        
         return header_view
         
     }
+    
+    
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let view_controller = self.storyboard!.instantiateViewController(withIdentifier: "PublicationDetailViewController") as! PublicationDetailViewController
         //view_controller.photo_id = publications_array[indexPath.row].photo_id
         let profile_cell = collectionView.cellForItem(at: indexPath) as! ProfileViewCell
-        
         
         view_controller.publication_image_value = profile_cell.publication_image.image
         view_controller.owner_name_value = publications_array[indexPath.row].owner
@@ -146,6 +145,7 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource, UICol
         view_controller.owner_image_url = self.user_image_url
         view_controller.photo_title_value = publications_array[indexPath.row].photo_title
         view_controller.photo_id = publications_array[indexPath.row].photo_id
+        view_controller.loved = publications_array[indexPath.row].loved
         
         //view_controller.owner_image.image =
     

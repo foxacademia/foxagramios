@@ -33,4 +33,5 @@ class PublicationObject: NSObject {
         self.owner = owner;
         self.photo_title = photo_title
     }
+    
 }
