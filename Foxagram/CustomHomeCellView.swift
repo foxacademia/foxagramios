@@ -26,7 +26,7 @@ class CustomHomeCellView: UITableViewCell {
     
     func loadCell(item: HomeObject, parent_view_controller: HomeFeedViewController) {
         self.parent_view_controller = parent_view_controller
-        publication_url = Utilities.photo_url + "\(item.owner_id)/\(item.photo_name)"
+        publication_url = Utilities.photo_url + "\(item.owner_id)/\(item.photo_name!)"
         publication_owner.text = item.owner
         publication_description.text = item.photo_title
         photo_id = item.photo_id

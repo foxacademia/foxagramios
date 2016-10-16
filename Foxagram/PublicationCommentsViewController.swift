@@ -131,13 +131,20 @@ class PublicationCommentsViewController: UIViewController, UITableViewDataSource
     func getCommentOwnerImage(index: Int, url: String, cell: CommentCellView) {
         if self.comment_owner_image[index] != nil {
             cell.owner_image.image = self.comment_owner_image[index]!
+            cell.owner_image.alpha = 1
             
         } else {
-            cell.owner_image.imageFromUrl(url_string: url, completion: { (data) in
-                self.comment_owner_image[index] = data
-            })
+            Alamofire.request(url).responseImage { response in
+                if let image = response.result.value {
+                    cell.owner_image.image = image
+                    self.comment_owner_image[index] = image
+                } else {
+                    cell.owner_image.image = UIImage(named: "sad_error")
+                    self.comment_owner_image[index] = UIImage(named: "sad_error")
+                }
+                cell.owner_image.alpha = 1
+            }
         }
-
     }
     
     @IBAction func post_comment(_ sender: UIButton) {

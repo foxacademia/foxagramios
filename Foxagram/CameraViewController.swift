@@ -83,7 +83,8 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate, UI
             self.camera_view.isHidden = true
             self.take_photo_btn.isHidden = true
             self.edit_title_button.isHidden = false
-        }else{
+            
+        } else {
             self.image_preview.isHidden = true
             self.upload_button.isHidden = true
             self.photo_title.isHidden = true
@@ -104,14 +105,12 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate, UI
             self.dismiss(animated: true, completion: nil)
         }
     }
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         uploadPhoto(textField)
         return true
     }
-    
-    
-
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -154,8 +153,10 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate, UI
         let photo_title = self.photo_title.text!
         Alamofire.upload(
             multipartFormData: { multipartFormData in
-                multipartFormData.append(image_to_send!, withName: "photo", fileName: "sd.jepg"
-                    , mimeType: "image/jpeg")
+                multipartFormData.append(image_to_send!,
+                                         withName: "photo",
+                                         fileName: "",
+                                         mimeType: "image/jpeg")
                 multipartFormData.append(photo_title.data(using: String.Encoding.utf8)!, withName: "title")
             },
             to: "\(Utilities.url)photo/upload",

@@ -94,6 +94,7 @@ class HomeFeedViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     func getHome() {
+        
         Alamofire.request( Utilities.url,
                            method: .get,
                            headers: Me.TOKEN ).responseJSON { response in
@@ -110,28 +111,38 @@ class HomeFeedViewController: UIViewController, UITableViewDataSource, UITableVi
     func setOwnerImage(index: String, section: CustomHomeSectionView, url: String) {
         if self.home_section_image[index] != nil {
             section.owner_image.image = self.home_section_image[index]!
+            section.owner_image.alpha = 1
             
         } else {
-            section.owner_image.imageFromUrl(url_string: url, completion: { (data) in
-                    self.home_section_image[index] = data
-            })
-            
+            Alamofire.request(url).responseImage { response in
+                if let image = response.result.value {
+                    section.owner_image.image = image
+                    self.home_section_image[index] = image
+                } else {
+                    section.owner_image.image = UIImage(named: "sad_error")
+                    self.home_section_image[index] = UIImage(named: "sad_error")
+                }
+                section.owner_image.alpha = 1
+            }
         }
     }
     
     func setOwnerPublication(index: String, cell: CustomHomeCellView, url: String) {
+        
         if self.home_publication_image[index] != nil {
             cell.publication_image.image = self.home_publication_image[index]!
             cell.publication_image.alpha = 1
         } else {
-            cell.publication_image.imageFromUrl(url_string: url, completion: { (data) in
-                if data == nil {
-                    cell.publication_image.image = UIImage(named: "sad_error")
-                    self.home_publication_image[index] = UIImage(named: "sad_error")
+            Alamofire.request(url).responseImage { response in
+                if let image = response.result.value {
+                    cell.publication_image.image = image
+                    self.home_publication_image[index] = image
+                } else {
+                 cell.publication_image.image = UIImage(named: "sad_error")
+                self.home_publication_image[index] = UIImage(named: "sad_error")
                 }
-                else { self.home_publication_image[index] = data }
                 cell.publication_image.alpha = 1
-            })
+            }
         }
     }
 
